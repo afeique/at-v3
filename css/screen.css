@@ -32,7 +32,7 @@
 
 /* line 34, ../sass/screen.scss */
 .brand, .nav a {
-  letter-spacing: 0.1em;
+  letter-spacing: 0.07em;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   -webkit-transition: color 0.3s ease-out, letter-spacing 0.15s ease-in;
   -moz-transition: color 0.3s ease-out, letter-spacing 0.15s ease-in;
