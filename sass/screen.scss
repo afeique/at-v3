@@ -1,0 +1,77 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass";
+
+/* Fonts */
+@font-face {
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Roboto Slab Regular'), local('RobotoSlab-Regular'), url(RobotoSlab-Regular.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Roboto Slab Bold'), local('RobotoSlab-Bold'), url(RobotoSlab-Bold.woff) format('woff');
+}
+
+@mixin branding-font {
+    font-family: 'Roboto Slab', serif;
+}
+
+.navbar-inverse .navbar-inner {
+    @include branding-font;
+    background-color: #4d4d4d; // Old browsers
+    @include filter-gradient(#4d4d4d, #2d2d2d, vertical); // IE6-9
+    @include background-image(linear-gradient(top, #4d4d4d 0%,#2d2d2d 100%));
+}
+
+.brand, .nav a {
+    letter-spacing: 0.1em;
+
+    @include text-shadow(0 -1px 0 rgba(0, 0, 0, 0.25));
+
+    @include transition(color 0.3s ease-out, letter-spacing 0.15s ease-in);
+    @include transition-delay(0s);
+
+    &:hover {
+        letter-spacing: 0.2em;
+        @include transition(color 0.3s ease-out, letter-spacing 0.15s ease-out);
+        @include transition-delay(0s);
+    }
+}
+
+body {
+    padding-top: 60px;
+}
+
+h1, h2, h3 {
+    @include branding-font;
+    font-weight: 400;
+}
+
+h1 {
+    font-weight: 2.3em;
+}
+
+h2 {
+    font-size: 1.7em;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.3em;
+}
+
+.username-input, .password-input {
+    width: 10em;
+}
+
+.email-input {
+    width: 21em;
+}
