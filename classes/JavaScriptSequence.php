@@ -1,12 +1,15 @@
 <?php
 
-
+namespace Acrosstime;
 
 class JavaScriptSequence {
-    protected $js;
+    protected $scripts;
 
-    public function __construct() {
-        $this->js = array();
+    public function __construct($js = Null) {
+        if (isset($js) )
+            $this->scripts = $js;
+        else
+            $this->scripts = array();
     }
 
     /**
@@ -21,29 +24,33 @@ class JavaScriptSequence {
      */
     public function add($script, $index_script = Null, $insert_after = False) {
         if (!isset($index_script) ) {
-            $this->js[] = $script;
+            $this->scripts[] = $script;
         } else {
-            $i = array_search($index_script, $this->js);
+            $i = array_search($index_script, $this->scripts);
             if ($i === False)
                 return False;
 
             if ($insert_after) {
-                if (!isset($this->js[$i+1]) ) {
-                    $this->js[] = $script;
+                if (!isset($this->scripts[$i+1]) ) {
+                    $this->scripts[] = $script;
                     return True;
                 }
                 
-                $a = array_slice($this->js, 0, $i+1);
-                $b = array_slice($this->js, $i+1);
+                $a = array_slice($this->scripts, 0, $i+1);
+                $b = array_slice($this->scripts, $i+1);
             } else {
-                $a = array_slice($this->js, 0, $i);
-                $b = array_slice($this->js, $i);
+                $a = array_slice($this->scripts, 0, $i);
+                $b = array_slice($this->scripts, $i);
             }
 
             $a[] = $script;
-            $this->js = array_merge($a, $b);
+            $this->scripts = array_merge($a, $b);
         }
 
         return True;
+    }
+
+    public function toArray() {
+        return $this->scripts;
     }
 }

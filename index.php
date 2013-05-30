@@ -1,46 +1,28 @@
 <?php
 
-/**
- * Load fat-free framework (f3).
- * https://github.com/bcosca/fatfree
- */
-$f3 = require 'lib/base.php';
+require 'classes/JavaScriptSequence.php';
 
-/*
- * Contains site-wide settings set to f3 global variables.
- * Because variables are set using f3, fat-free must be loaded before the config.
- */
-require 'config.php';
+require 'vendor/autoload.php';
+$klein = new \Klein\Klein();
 
-/**
- * Page class is an object that abstracts a page.
- * Tied inherently to the f3 global variables containing page data (see below).
- * Contains services methods used to manipulate page data stored in f3 globals.
- * E.g. page title, page content, page scripts, page stylesheets.
- */
-require 'classes/Page.php';
+$klein->respond(function($request, $response, $page) {
+    $page->title = 'untitled';
+    $page->title_separator = ' @ ';
+    $page->title_suffix = 'acrossti.me';
+    $page->content = '';
+    $page->view = 'main';
+    $page->use_minified_resources = True;
+    $page->js_sequence = new \Acrosstime\JavaScriptSequence(array(array('jquery', 'bootstrap'), array('analytics') ) );
+});
 
-/**
- * Create a new page.
- */
-$page = new Page($f3);
+$klein->respond('/', function($request, $response, $page) {
+    $page->title = '';
+    $page->title_separator = '';
 
-/**
- * We could alternatively have added the JavaScripts to the page by writing:
- *
- * $index = $page->add_js('jquery.min');    // create a new sequence containing jquery (seq. index = 0)
- * $page->add_js('bootstrap.min', $index);  // add bootstrap to jquery sequence (seq. index = 0)
- * $page->add_js('analytics');              // create a new sequence containing google analytics (seq. index = 1)
- */
-
-$f3->route('GET /', function($f3) use ($page) {
     ob_start();
     require 'pages/frontpage.php';
     $page->content = ob_get_clean();
-
-    $view = new View;
-
-    echo $view->render($f3->get('view_path') . $f3->get('view') . $f3->get('view_ext') );
+    $page->render('views/'. $page->view .'.php');
 });
 
-$f3->run();
+$klein->dispatch();

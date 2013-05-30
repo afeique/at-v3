@@ -1,15 +1,9 @@
-<?php
-
-$page->title = 'home';
-
-?>
-
 <div class="row">
     <div class="span6">
-        <h1>Take charge of time</h1>
-        <h2>&hellip;and watch yourself grow.</h2>
+        <h1>Watch yourself grow</h1>
+        <h2>&hellip;across time.</h2>
         <h3>
-            Track the time you spend on tasks in a fun and social way!
+            Acrosstime helps people track the time they spend on activities in a fun and social way.
         </h3>
     </div>
 
@@ -25,7 +19,7 @@ $page->title = 'home';
             <br />
             <input type="text" placeholder="verify email" />
             <br />
-
+            <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
 </div>

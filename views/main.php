@@ -2,34 +2,34 @@
 <html lang="en">
     <head>
         <title>
-            <?= $title . $title_separator . $title_suffix ?>
+            <?= $this->title . $this->title_separator . $this->title_suffix ?>
         
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <?php
         $min = '';
-        if ($use_minified_resources)
+        if ($this->use_minified_resources)
             $min = '.min';
         ?>
 
         <!-- bootstrap -->
-        <link href="<?= $css_base_url ?>bootstrap<?= $min ?>.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="/css/bootstrap<?= $min ?>.css" media="screen" rel="stylesheet" type="text/css" />
 
         <!-- main css -->
-        <link href="<?= $css_base_url ?>screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
-        <link href="<?= $css_base_url ?>print.css" media="print" rel="stylesheet" type="text/css" />
+        <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+        <link href="/css/print.css" media="print" rel="stylesheet" type="text/css" />
         <!--[if IE]>
             <link href="stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
         <![endif]-->
 
         <!-- head.js -->
-        <script src="<?= $js_base_url ?>head<?= $min ?>.js"></script>
+        <script src="/js/head<?= $min ?>.js"></script>
         <script type="text/javascript">
-            <? foreach ($js as $scripts): 
+            <? foreach ($this->js_sequence->toArray() as $scripts): 
             $seq = array();
             array_walk($scripts, function($script, $i) use (&$seq, $js_base_url, $min) {
-                $seq[] = '"'. $js_base_url . $script . $min .'.js';
+                $seq[] = '"/js/' . $script . $min .'.js';
 
             }); ?>
             
@@ -49,7 +49,7 @@
         </div>
 
         <div class="container" id="main-container">
-            <?= Base::instance()->raw($content) ?>
+            <?= $this->content ?>
 
         </div>
     </body>
