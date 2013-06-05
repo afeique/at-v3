@@ -3,54 +3,54 @@
 namespace Acrosstime;
 
 class JavaScriptSequence {
-    protected $scripts;
+    protected $sequence;
 
-    public function __construct($js = Null) {
-        if (isset($js) )
-            $this->scripts = $js;
+    public function __construct(array $sequence = Null) {
+        if (isset($sequence) )
+            $this->sequence = $sequence;
         else
-            $this->scripts = array();
+            $this->sequence = array();
     }
 
     /**
      * Adds a script to the squence. Can insert the script at a specific point.
-     * $index_script is the script relative which to insert, $in
+     * $relative_to is the script relative which to insert.
      * 
      * @param string $script Name of the script to add to the sequence
-     * @param string $index_script Name of the script in the sequence to insert relative to
-     * @param mixed $insert_after Whether to insert before or after the $index_script
+     * @param string $relative_to Name of the script in the sequence to insert relative to
+     * @param mixed $insert_after Whether to insert before or after the $relative_to
      *
      * @return bool Returns True on successful insert, False on failure.
      */
-    public function add($script, $index_script = Null, $insert_after = False) {
-        if (!isset($index_script) ) {
-            $this->scripts[] = $script;
+    public function add_script($script, $relative_to = Null, $insert_after = False) {
+        if (!isset($relative_to) ) {
+            $this->sequence[] = $script;
         } else {
-            $i = array_search($index_script, $this->scripts);
+            $i = array_search($relative_to, $this->sequence);
             if ($i === False)
                 return False;
 
             if ($insert_after) {
-                if (!isset($this->scripts[$i+1]) ) {
-                    $this->scripts[] = $script;
+                if (!isset($this->sequence[$i+1]) ) {
+                    $this->sequence[] = $script;
                     return True;
                 }
                 
-                $a = array_slice($this->scripts, 0, $i+1);
-                $b = array_slice($this->scripts, $i+1);
+                $a = array_slice($this->sequence, 0, $i+1);
+                $b = array_slice($this->sequence, $i+1);
             } else {
-                $a = array_slice($this->scripts, 0, $i);
-                $b = array_slice($this->scripts, $i);
+                $a = array_slice($this->sequence, 0, $i);
+                $b = array_slice($this->sequence, $i);
             }
 
             $a[] = $script;
-            $this->scripts = array_merge($a, $b);
+            $this->sequence = array_merge($a, $b);
         }
 
         return True;
     }
 
-    public function toArray() {
-        return $this->scripts;
+    public function to_array() {
+        return $this->sequence;
     }
 }

@@ -26,10 +26,10 @@
         <!-- head.js -->
         <script src="/js/head<?= $min ?>.js"></script>
         <script type="text/javascript">
-            <? foreach ($this->js_sequence->toArray() as $scripts): 
+            <? foreach ($this->js->to_array() as $scripts): 
             $seq = array();
-            array_walk($scripts, function($script, $i) use (&$seq, $js_base_url, $min) {
-                $seq[] = '"/js/' . $script . $min .'.js';
+            array_walk($scripts, function($script, $i) use (&$seq, $min) {
+                $seq[] = '"/js/' . $script . $min .'.js"';
 
             }); ?>
             

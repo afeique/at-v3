@@ -31,19 +31,23 @@
     @include background-image(linear-gradient(top, #4d4d4d 0%,#2d2d2d 100%));
 }
 
-.brand, .nav a {
+.navbar-inverse .brand, .nav a {
     letter-spacing: 0.07em;
 
     @include text-shadow(0 -1px 0 rgba(0, 0, 0, 0.25));
 
-    @include transition(color 0.3s ease-out, letter-spacing 0.15s ease-in);
+    @include transition(color 0.3s ease-in, letter-spacing 0.15s ease-in);
     @include transition-delay(0s);
 
     &:hover {
-        letter-spacing: 0.2em;
+        letter-spacing: 0.23em;
         @include transition(color 0.3s ease-out, letter-spacing 0.15s ease-out);
         @include transition-delay(0s);
     }
+}
+
+.navbar-inverse .brand {
+    color: #4d4d4d;
 }
 
 body {
@@ -68,10 +72,15 @@ h3 {
     font-size: 1.3em;
 }
 
-.username-input, .password-input {
-    width: 10em;
+.btn-register {
+    @include branding-font;
+    font-weight: 700;
+    letter-spacing: .07em;
+    font-size: 1.2em;
+    padding: .4em 1.7em;
 }
 
-.email-input {
-    width: 21em;
+#frontpage-clock {
+    width: 300px;
+    height: 150;
 }

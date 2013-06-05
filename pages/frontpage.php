@@ -1,9 +1,12 @@
 <div class="row">
     <div class="span6">
-        <h1>Watch yourself grow</h1>
-        <h2>&hellip;across time.</h2>
+        <h1>Track yourself</h1>
+        <h2>&hellip;as you grow across time.</h2>
+        <div id="frontpage-clock">
+            <canvas id="frontpage-clock-canvas"></canvas>
+        </div>
         <h3>
-            Acrosstime helps people track the time they spend on activities in a fun and social way.
+            Track the time you spend improving yourself in a fun and social way!
         </h3>
     </div>
 
@@ -19,7 +22,7 @@
             <br />
             <input type="text" placeholder="verify email" />
             <br />
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary btn-register">Register</button>
         </form>
     </div>
 </div>
