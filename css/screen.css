@@ -89,6 +89,11 @@ h3 {
 }
 
 /* line 75, ../sass/screen.scss */
+h3#frontpage-blurb {
+  padding-right: 4em;
+}
+
+/* line 79, ../sass/screen.scss */
 .btn-register {
   font-family: 'Roboto Slab', serif;
   font-weight: 700;
@@ -97,7 +102,7 @@ h3 {
   padding: .4em 1.7em;
 }
 
-/* line 83, ../sass/screen.scss */
+/* line 87, ../sass/screen.scss */
 #frontpage-clock {
   width: 300px;
   height: 150;

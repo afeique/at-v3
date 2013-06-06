@@ -72,6 +72,10 @@ h3 {
     font-size: 1.3em;
 }
 
+h3#frontpage-blurb {
+    padding-right: 4em;    
+}
+
 .btn-register {
     @include branding-font;
     font-weight: 700;

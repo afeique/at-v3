@@ -5,7 +5,7 @@
         <div id="frontpage-clock">
             <canvas id="frontpage-clock-canvas"></canvas>
         </div>
-        <h3>
+        <h3 id="frontpage-blurb">
             Track the time you spend improving yourself in a fun and social way!
         </h3>
     </div>
