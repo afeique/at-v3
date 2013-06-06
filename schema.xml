@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<database name="acrosstime" defaultIdMethod="native">
+    <table name="users" phpname="User">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="name" type="varchar" required="true" size="250" />
+        <column name="email" type="varchar" required="true" size="250" />
+        <column name="pass_hash" type="char" required="true" size="60" />
+        <column name="pass_salt" type="char" required="true" size="8" />
+        <column name="ap" type="integer" required="true" defaultValue="0" />
+        <column name="ep" type="integer" required="true" defaultValue="0" />
+    </table>
+</database>

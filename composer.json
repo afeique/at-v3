@@ -1,5 +1,6 @@
 {
     "require": {
-        "klein/klein": "2.0.x"
+        "klein/klein": "~2.0",
+	"propel/propel1": "~1.6"
     }
 }

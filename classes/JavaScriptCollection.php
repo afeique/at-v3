@@ -7,25 +7,41 @@ require 'JavaScriptSequence.php';
 class JavaScriptCollection {
     protected $collection;
 
-    public function __construct(array $collection = Null) {
-        $this->colection = array();
+    public function __construct($collection = Null) {
+        $this->collection = array();
 
         if (isset($collection) ) {
-            foreach ($collection as $sequence_array) {
-                $this->collection[] = new JavaScriptSequence;
-                $i = sizeof($this->collection)-1;
-
-                foreach ($sequence_array as $script) {
-                    $this->collection[$i]->add_script($script);
+            if (is_array($collection) ) {    
+                foreach ($collection as $sequence_array) {
+                    $this->add_sequence($sequence_array);
                 }
+            } else if (is_string($collection) ) {
+                $script = $collection;
+                $this->add_sequence($script);
             }
         }
     }
 
-    public function add_sequence(JavaScriptSequence $sequence) {
-        $this->collection[] = $sequence;
+    public function add_sequence($sequence) {
+        if ($sequence instanceof JavaScriptSequence) {
+            $this->collection[] = $sequence;
+        } else {
+            $this->collection[] = new JavaScriptSequence;
+            $i = sizeof($this->collection)-1;
+
+            if (is_array($sequence) ) {
+                $this->collection[$i]->add_scripts($sequence);
+            } else if (is_string($sequence) ) {
+                $script = $sequence;
+                $this->collection[$i]->add_script($script);
+            }
+        }
 
         return sizeof($this->collection)-1;
+    }
+
+    public function add_scripts($sequence_index, array $scripts, $relative_to = Null, $insert_after = False) {
+        return $this->collection[$sequence_index]->add_scripts($scripts, $relative_to, $insert_after);
     }
 
     public function add_script($sequence_index, $script, $relative_to = Null, $insert_after = False) {

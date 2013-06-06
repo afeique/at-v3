@@ -19,7 +19,7 @@ $klein->respond(function($request, $response, $page) {
 $klein->respond('/', function($request, $response, $page) {
     $page->title = '';
     $page->title_separator = '';
-    $page->js->add_sequence(new \Acrosstime\JavaScriptSequence(array('frontpage-clock') ) );
+    $page->js->add_sequence('frontpage-clock');
 
     ob_start();
     require 'pages/frontpage.php';

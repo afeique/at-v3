@@ -50,6 +50,12 @@ class JavaScriptSequence {
         return True;
     }
 
+    public function add_scripts(array $scripts, $relative_to = Null, $insert_after = False) {
+        foreach (array_reverse($scripts) as $script) {
+            $this->add_script($script, $relative_to, $insert_after);
+        }
+    }
+
     public function to_array() {
         return $this->sequence;
     }
