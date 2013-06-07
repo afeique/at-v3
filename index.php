@@ -10,10 +10,9 @@ $klein->respond(function($request, $response, $page) {
     $page->title_separator = ' @ ';
     $page->title_suffix = 'acrossti.me';
     $page->content = '';
-    $page->view = 'main';
+    $page->template = 'main';
     $page->use_minified_resources = False;
     $page->js = new \Acrosstime\JavaScriptCollection(array(array('jquery', 'bootstrap'), array('analytics') ) );
-
 });
 
 $klein->respond('/', function($request, $response, $page) {
@@ -24,7 +23,7 @@ $klein->respond('/', function($request, $response, $page) {
     ob_start();
     require 'pages/frontpage.php';
     $page->content = ob_get_clean();
-    $page->render('views/'. $page->view .'.php');
+    $page->render('templates/'. $page->template .'.php');
 });
 
 $klein->dispatch();

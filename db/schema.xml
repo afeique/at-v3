@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<database name="acrosstime" defaultIdMethod="native">
+    <table name="users" phpName="User">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="name" type="varchar" required="true" size="250" />
+        <column name="email" type="varchar" required="true" size="250" />
+        <column name="pass_hash" type="char" required="true" size="60" />
+        <column name="pass_salt" type="char" required="true" size="8" />
+        <column name="ap" type="integer" required="true" defaultValue="0" />
+        <column name="ep" type="integer" required="true" defaultValue="0" />
+        <unique>
+            <unique-column name="name" />
+        </unique>
+        <unique>
+            <unique-column name="email" />
+        </unique>
+        <behavior name="timestampable" />
+    </table>
+
+    <table name="activities" phpName="Activity">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="name" type="varchar" required="true" size="250" />
+        <unique>
+            <unique-column name="name" />
+        </unique>
+    </table>
+
+    <table name="user_activity_timelog" phpName="UserActivityTimelog">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="user_id" type="integer" required="true" />
+        <column name="activity_id" type="integer" required="true" />
+        <foreign-key foreignTable="users" phpName="User" refPhpName="ActivityTimelog">
+            <reference local="user_id" foreign="id" />
+        </foreign-key>
+        <foreign-key foreignTable="activities" phpName="Activity" refPhpName="UserTimelog">
+            <reference local="activity_id" foreign="id" />
+        </foreign-key>
+        <behavior name="timestampable" />
+    </table>
+
+    <table name="sessions" phpName="Session">
+        <column name="id" type="varchar" required="true" primaryKey="true" />
+        <column name="data" type="text" />
+        <behavior name="timestampable" />
+    </table>
+</database>
