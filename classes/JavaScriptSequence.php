@@ -51,7 +51,9 @@ class JavaScriptSequence {
     }
 
     public function add_scripts(array $scripts, $relative_to = Null, $insert_after = False) {
-        foreach (array_reverse($scripts) as $script) {
+        if (isset($relative_to) )
+            $scripts = array_reverse($scripts);
+        foreach ($scripts as $script) {
             $this->add_script($script, $relative_to, $insert_after);
         }
     }

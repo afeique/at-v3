@@ -10,12 +10,13 @@
     <div class="span6">
         <h1>Login or Register</h1>
         <h2>It's fast and easy.</h2>
-        <form class="registration-form">
-            <input type="text" placeholder="username" />
+        <form class="registration-form" action="/register" method="post">
+            <input type="text" class="login-username" placeholder="username" />
             <br />
-            <input type="password" placeholder="password" />
+            <input type="password" class="login-password" placeholder="password" />
             <br />
             <button type="submit" class="btn btn-primary btn-register">Login or Register</button>
+            <p class="muted error-msg">Please fill out all fields.</p>
         </form>
     </div>
 </div>

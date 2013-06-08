@@ -13,6 +13,10 @@
             $min = '.min';
         ?>
 
+        <!--[if lt IE 9]>
+        <script src="/js/html5shiv.js"></script>
+        <![endif]-->
+
         <!-- bootstrap -->
         <link href="/css/bootstrap<?= $min ?>.css" media="screen" rel="stylesheet" type="text/css" />
 
@@ -20,7 +24,7 @@
         <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
         <link href="/css/print.css" media="print" rel="stylesheet" type="text/css" />
         <!--[if IE]>
-            <link href="stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+            <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
         <![endif]-->
 
         <!-- head.js -->
