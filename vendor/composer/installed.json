@@ -111,24 +111,24 @@
     },
     {
         "name": "propel/propel1",
-        "version": "1.6.9",
-        "version_normalized": "1.6.9.0",
+        "version": "1.6.8",
+        "version_normalized": "1.6.8.0",
         "source": {
             "type": "git",
             "url": "https://github.com/propelorm/Propel.git",
-            "reference": "1.6.9"
+            "reference": "1.6.8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/propelorm/Propel/zipball/1.6.9",
-            "reference": "1.6.9",
+            "url": "https://api.github.com/repos/propelorm/Propel/zipball/1.6.8",
+            "reference": "1.6.8",
             "shasum": ""
         },
         "require": {
             "phing/phing": ">=2.4,<3.0",
             "php": ">=5.2.4"
         },
-        "time": "2013-03-31 17:20:51",
+        "time": "2013-02-14 20:50:27",
         "bin": [
             "generator/bin/propel-gen",
             "generator/bin/propel-gen.bat"

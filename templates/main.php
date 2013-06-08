@@ -43,7 +43,18 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="brand" href="/">acrosstime</a>
+                    <div class="row">
+                        <div class="span6">
+                            <a class="brand" href="/">acrosstime</a>
+                        </div>
+                        <div class="span6">
+                            <form class="login-form">
+                                <input type="text" placeholder="username" />
+                                <input type="password" placeholder="password" />
+                                <button type="submit" class="btn btn-primary btn-login">login</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

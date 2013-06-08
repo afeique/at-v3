@@ -24,6 +24,10 @@
     font-family: 'Roboto Slab', serif;
 }
 
+body {
+    padding-top: 60px;
+}
+
 .navbar-inverse .navbar-inner {
     @include branding-font;
     background-color: #4d4d4d; // Old browsers
@@ -36,22 +40,42 @@
 
     @include text-shadow(0 -1px 0 rgba(0, 0, 0, 0.25));
 
-    @include transition(color 0.3s ease-in, letter-spacing 0.15s ease-in);
+    @include transition(color 0.23s ease-out, letter-spacing 0.1s ease-out);
     @include transition-delay(0s);
 
     &:hover {
         letter-spacing: 0.23em;
-        @include transition(color 0.3s ease-out, letter-spacing 0.15s ease-out);
+        @include transition(color 0.23s ease-in, letter-spacing 0.1s ease-in);
         @include transition-delay(0s);
     }
 }
 
 .navbar-inverse .brand {
     color: #4d4d4d;
+    font-size: 1.7em;
 }
 
-body {
-    padding-top: 60px;
+.login-form {
+    display: inline;
+    margin: 0;
+}
+
+.login-form input {
+    margin-top: .7em;
+    width: 10em;
+    height: .9em;
+}
+
+.btn-primary {
+    @include branding-font;
+    font-weight: 700;
+}
+
+.login-form button {
+    font-size: .9em;
+    margin-bottom: .5em;
+    padding: .1em .7em;
+    letter-spacing: .12em;
 }
 
 h1, h2, h3 {
@@ -76,15 +100,17 @@ h3#frontpage-blurb {
     padding-right: 4em;    
 }
 
-.btn-register {
-    @include branding-font;
-    font-weight: 700;
-    letter-spacing: .07em;
+.registration-form button {
     font-size: 1.2em;
-    padding: .4em 1.7em;
+    letter-spacing: .07em;
+    padding: .2em .7em .4em .7em;
 }
 
 #frontpage-clock {
     width: 300px;
     height: 150;
+}
+
+.error-msg {
+    margin-top: .7em;
 }

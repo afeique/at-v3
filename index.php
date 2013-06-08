@@ -4,6 +4,7 @@ require 'classes/JavaScriptCollection.php';
 
 require 'vendor/autoload.php';
 $klein = new \Klein\Klein();
+Propel::init("db/build/conf/acrosstime-conf.php");
 
 $klein->respond(function($request, $response, $page) {
     $page->title = 'untitled';

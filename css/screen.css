@@ -18,6 +18,11 @@
 }
 
 /* line 27, ../sass/screen.scss */
+body {
+  padding-top: 60px;
+}
+
+/* line 31, ../sass/screen.scss */
 .navbar-inverse .navbar-inner {
   font-family: 'Roboto Slab', serif;
   background-color: #4d4d4d;
@@ -30,80 +35,106 @@
   background-image: linear-gradient(top, #4d4d4d 0%, #2d2d2d 100%);
 }
 
-/* line 34, ../sass/screen.scss */
+/* line 38, ../sass/screen.scss */
 .navbar-inverse .brand, .nav a {
   letter-spacing: 0.07em;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  -webkit-transition: color 0.3s ease-in, letter-spacing 0.15s ease-in;
-  -moz-transition: color 0.3s ease-in, letter-spacing 0.15s ease-in;
-  -o-transition: color 0.3s ease-in, letter-spacing 0.15s ease-in;
-  transition: color 0.3s ease-in, letter-spacing 0.15s ease-in;
+  -webkit-transition: color 0.23s ease-out, letter-spacing 0.1s ease-out;
+  -moz-transition: color 0.23s ease-out, letter-spacing 0.1s ease-out;
+  -o-transition: color 0.23s ease-out, letter-spacing 0.1s ease-out;
+  transition: color 0.23s ease-out, letter-spacing 0.1s ease-out;
   -webkit-transition-delay: 0s;
   -moz-transition-delay: 0s;
   -o-transition-delay: 0s;
   transition-delay: 0s;
 }
-/* line 42, ../sass/screen.scss */
+/* line 46, ../sass/screen.scss */
 .navbar-inverse .brand:hover, .nav a:hover {
   letter-spacing: 0.23em;
-  -webkit-transition: color 0.3s ease-out, letter-spacing 0.15s ease-out;
-  -moz-transition: color 0.3s ease-out, letter-spacing 0.15s ease-out;
-  -o-transition: color 0.3s ease-out, letter-spacing 0.15s ease-out;
-  transition: color 0.3s ease-out, letter-spacing 0.15s ease-out;
+  -webkit-transition: color 0.23s ease-in, letter-spacing 0.1s ease-in;
+  -moz-transition: color 0.23s ease-in, letter-spacing 0.1s ease-in;
+  -o-transition: color 0.23s ease-in, letter-spacing 0.1s ease-in;
+  transition: color 0.23s ease-in, letter-spacing 0.1s ease-in;
   -webkit-transition-delay: 0s;
   -moz-transition-delay: 0s;
   -o-transition-delay: 0s;
   transition-delay: 0s;
-}
-
-/* line 49, ../sass/screen.scss */
-.navbar-inverse .brand {
-  color: #4d4d4d;
 }
 
 /* line 53, ../sass/screen.scss */
-body {
-  padding-top: 60px;
+.navbar-inverse .brand {
+  color: #4d4d4d;
+  font-size: 1.7em;
 }
 
-/* line 57, ../sass/screen.scss */
+/* line 58, ../sass/screen.scss */
+.login-form {
+  display: inline;
+  margin: 0;
+}
+
+/* line 63, ../sass/screen.scss */
+.login-form input {
+  margin-top: .7em;
+  width: 10em;
+  height: .9em;
+}
+
+/* line 69, ../sass/screen.scss */
+.btn-primary {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+}
+
+/* line 74, ../sass/screen.scss */
+.login-form button {
+  font-size: .9em;
+  margin-bottom: .5em;
+  padding: .1em .7em;
+  letter-spacing: .12em;
+}
+
+/* line 81, ../sass/screen.scss */
 h1, h2, h3 {
   font-family: 'Roboto Slab', serif;
   font-weight: 400;
 }
 
-/* line 62, ../sass/screen.scss */
+/* line 86, ../sass/screen.scss */
 h1 {
   font-weight: 2.3em;
 }
 
-/* line 66, ../sass/screen.scss */
+/* line 90, ../sass/screen.scss */
 h2 {
   font-size: 1.7em;
   font-weight: 700;
 }
 
-/* line 71, ../sass/screen.scss */
+/* line 95, ../sass/screen.scss */
 h3 {
   font-size: 1.3em;
 }
 
-/* line 75, ../sass/screen.scss */
+/* line 99, ../sass/screen.scss */
 h3#frontpage-blurb {
   padding-right: 4em;
 }
 
-/* line 79, ../sass/screen.scss */
-.btn-register {
-  font-family: 'Roboto Slab', serif;
-  font-weight: 700;
-  letter-spacing: .07em;
+/* line 103, ../sass/screen.scss */
+.registration-form button {
   font-size: 1.2em;
-  padding: .4em 1.7em;
+  letter-spacing: .07em;
+  padding: .2em .7em .4em .7em;
 }
 
-/* line 87, ../sass/screen.scss */
+/* line 109, ../sass/screen.scss */
 #frontpage-clock {
   width: 300px;
   height: 150;
+}
+
+/* line 114, ../sass/screen.scss */
+.error-msg {
+  margin-top: .7em;
 }

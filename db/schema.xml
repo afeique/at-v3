@@ -7,8 +7,8 @@
         <column name="email" type="varchar" required="true" size="250" />
         <column name="pass_hash" type="char" required="true" size="60" />
         <column name="pass_salt" type="char" required="true" size="8" />
-        <column name="ap" type="integer" required="true" defaultValue="0" />
         <column name="ep" type="integer" required="true" defaultValue="0" />
+        <column name="dp" type="integer" required="true" defaultValue="0" />
         <unique>
             <unique-column name="name" />
         </unique>
@@ -41,7 +41,7 @@
 
     <table name="sessions" phpName="Session">
         <column name="id" type="varchar" required="true" primaryKey="true" />
-        <column name="data" type="text" />
+        <column name="data" type="longvarchar" />
         <behavior name="timestampable" />
     </table>
 </database>

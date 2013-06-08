@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5e531ac58b3a57df7fc0d7a7afd86589",
+    "hash": "33763b2de2cf6c0ac44ebd542ec9011d",
     "packages": [
         {
             "name": "klein/klein",
@@ -113,16 +113,16 @@
         },
         {
             "name": "propel/propel1",
-            "version": "1.6.9",
+            "version": "1.6.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/propelorm/Propel.git",
-                "reference": "1.6.9"
+                "reference": "1.6.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/propelorm/Propel/zipball/1.6.9",
-                "reference": "1.6.9",
+                "url": "https://api.github.com/repos/propelorm/Propel/zipball/1.6.8",
+                "reference": "1.6.8",
                 "shasum": ""
             },
             "require": {
@@ -169,7 +169,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2013-03-31 17:20:51"
+            "time": "2013-02-14 20:50:27"
         }
     ],
     "packages-dev": [

@@ -13,7 +13,7 @@
     <div class="span6">
         <h1>Register</h1>
         <h2>It's fast and easy.</h2>
-        <form>
+        <form class="registration-form">
             <input type="text" placeholder="username" />
             <br />
             <input type="password" placeholder="password" />
@@ -22,7 +22,10 @@
             <br />
             <input type="text" placeholder="verify email" />
             <br />
-            <button type="submit" class="btn btn-primary btn-register">Register</button>
+            <button type="submit" class="btn btn-primary btn-register">register</button>
+            <p class="muted error-msg">
+                All fields are required.
+            </p>
         </form>
     </div>
 </div>

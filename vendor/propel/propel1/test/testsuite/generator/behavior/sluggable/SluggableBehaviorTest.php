@@ -364,24 +364,6 @@ class SluggableBehaviorTest extends BookstoreTestBase
         $t->save($con);
 
         $this->assertEquals('world-2', $t->getSlug());
-
-        $t = new Table13();
-        $t->setTitle('World 000');
-        $t->save($con);
-
-        $this->assertEquals('world-000', $t->getSlug());
-
-        $t = new Table13();
-        $t->setTitle('World');
-        $t->save($con);
-
-        $this->assertEquals('world-101', $t->getSlug());
-
-        $t = new Table13();
-        $t->setTitle('World');
-        $t->save($con);
-
-        $this->assertEquals('world-102', $t->getSlug());
     }
 }
 
