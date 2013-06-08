@@ -48,11 +48,13 @@
                             <a class="brand" href="/">acrosstime</a>
                         </div>
                         <div class="span6">
-                            <form class="login-form">
+                            <? if ($this->show_navbar_login): ?>
+                            <form class="login-form" action="/register" method="post">
                                 <input type="text" placeholder="username" />
                                 <input type="password" placeholder="password" />
-                                <button type="submit" class="btn btn-primary btn-login">login</button>
+                                <button type="submit" class="btn btn-primary btn-login">login or register</button>
                             </form>
+                            <? endif; ?>
                         </div>
                     </div>
                 </div>

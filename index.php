@@ -14,12 +14,14 @@ $klein->respond(function($request, $response, $page) {
     $page->template = 'main';
     $page->use_minified_resources = False;
     $page->js = new \Acrosstime\JavaScriptCollection(array(array('jquery', 'bootstrap'), array('analytics') ) );
+    $page->show_navbar_login = True;
 });
 
 $klein->respond('/', function($request, $response, $page) {
     $page->title = '';
     $page->title_separator = '';
     $page->js->add_sequence('frontpage-clock');
+    $page->show_navbar_login = False;
 
     ob_start();
     require 'pages/frontpage.php';

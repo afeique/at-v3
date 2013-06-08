@@ -117,8 +117,8 @@ h3 {
 }
 
 /* line 99, ../sass/screen.scss */
-h3#frontpage-blurb {
-  padding-right: 4em;
+#frontpage-blurb {
+  text-align: center;
 }
 
 /* line 103, ../sass/screen.scss */
