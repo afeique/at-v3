@@ -5,7 +5,7 @@ This is the centralized codebase for acrossti.me.
 ## Requirements
 
 * PHP (>= 5.3.0)
-* MySQL with InnoDB support
+* A database supported by [Propel][]
 * Apache2 with mod_rewrite
 
 ## External Libraries
@@ -23,7 +23,11 @@ External libraries or tools used directly for development, not including depende
 
 ## Configuration
 
-It is necessary to write [Propel][] `build.properties` and `runtime-conf.xml` files to the specifications of your development database. Save these files to `/db` alongside `schema.xml` and run `propel-gen runtime-conf` to get [Propel][] working. For more information, read the [Propel documentation on building models](http://propelorm.org/documentation/02-buildtime.html#building-the-model).
+* Write [Propel][] `build.properties` and `runtime-conf.xml` files to the specifications of the working database. 
+* Save these files to `/db` alongside `schema.xml`. 
+* Run `propel-gen runtime-conf` inside `/db`. 
+
+For more information, read the [Propel documentation on building models](http://propelorm.org/documentation/02-buildtime.html#building-the-model).
 
 [Composer]: http://getcomposer.org/
 [Klein.php]: https://github.com/chriso/klein.php

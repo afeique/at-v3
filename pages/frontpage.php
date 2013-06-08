@@ -16,7 +16,6 @@
             <input type="password" class="login-password" placeholder="password" />
             <br />
             <button type="submit" class="btn btn-primary btn-register">Login or Register</button>
-            <p class="muted error-msg">Please fill out all fields.</p>
         </form>
     </div>
 </div>

@@ -26,6 +26,12 @@ $klein->respond('/', function($request, $response, $page) {
     ob_start();
     require 'pages/frontpage.php';
     $page->content = ob_get_clean();
+
+    $page->render('templates/'. $page->template .'.php');
+});
+
+$klein->respond('/[:page]', function() {
+    $page->content = 'not found';
     $page->render('templates/'. $page->template .'.php');
 });
 

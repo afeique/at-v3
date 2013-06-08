@@ -93,8 +93,8 @@ function drawFrontpageClock() {
 
         // current time
         var now = new Date();
-        drawHand(51, 10, 12, Math.PI/30*now.getSeconds());
-        drawHand(23, 7, 12, Math.PI/500*(now.getMilliseconds()-250));
+        drawHand(51, 10, 12, Math.PI/30*(now.getSeconds() + now.getMilliseconds()/1000 ) );
+        drawHand(23, 7, 12, Math.PI/500*(now.getMilliseconds() - 250) );
 
         setTimeout(drawFrontpageClock, 1);
     }
