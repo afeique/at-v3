@@ -6,7 +6,9 @@ This is the centralized codebase for acrossti.me.
 
 * PHP (>= 5.3.0)
 * A database supported by [Propel][]
-* Apache2 with mod_rewrite
+* A web server that supports url rewriting
+
+The code comes with a simple `.htaccess` file ripped from [this gist](https://gist.github.com/chriso/874000) written by the author of [Klein.php][].
 
 ## External Libraries
 
