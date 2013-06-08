@@ -1,6 +1,6 @@
 # acrosstime 
 
-This is the centralized codebase for acrossti.me. It is currently under heavy development.
+This is the centralized codebase for acrossti.me.
 
 ## External Libraries
 
