@@ -10,18 +10,18 @@
     <div class="span6">
         <h1>Login or Register</h1>
         <h2>It's fast and easy.</h2>
-        <form class="registration-form" action="/register" method="post">
-            <input type="text" class="login-username" placeholder="username" />
+        <form class="lr-form" action="/register" method="post">
+            <input type="text" placeholder="email" />
             <br />
-            <input type="password" class="login-password" placeholder="password" />
+            <input type="password" placeholder="password" />
             <br />
             <button type="submit" class="btn btn-primary btn-register">Login or Register</button>
         </form>
     </div>
 </div>
 <div class="row">
-    <div class="span2">&nbsp;</div>
-    <div class="span6">
+    <div class="span1">&nbsp;</div>
+    <div class="span8">
         <h3 id="frontpage-blurb">
             Track the time you spend improving yourself in a fun and social way!
         </h3>

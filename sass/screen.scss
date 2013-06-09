@@ -55,23 +55,23 @@ body {
     font-size: 1.7em;
 }
 
-.login-form {
-    display: inline;
-    margin: 0;
-}
-
-.login-form input {
-    margin-top: .7em;
-    width: 10em;
-    height: .9em;
-}
-
 .btn-primary {
     @include branding-font;
     font-weight: 700;
 }
 
-.login-form button {
+.navbar .lr-form {
+    display: inline;
+    margin: 0;
+}
+
+.navbar .lr-form input {
+    margin-top: .7em;
+    width: 10em;
+    height: .9em;
+}
+
+.navbar .lr-form button {
     font-size: .9em;
     margin-bottom: .5em;
     padding: .1em .7em;
@@ -100,7 +100,7 @@ h3 {
     text-align: center;  
 }
 
-.registration-form button {
+.lr-form button {
     font-size: 1.2em;
     letter-spacing: .07em;
     padding: .2em .7em .4em .7em;

@@ -68,26 +68,26 @@ body {
 }
 
 /* line 58, ../sass/screen.scss */
-.login-form {
-  display: inline;
-  margin: 0;
-}
-
-/* line 63, ../sass/screen.scss */
-.login-form input {
-  margin-top: .7em;
-  width: 10em;
-  height: .9em;
-}
-
-/* line 69, ../sass/screen.scss */
 .btn-primary {
   font-family: 'Roboto Slab', serif;
   font-weight: 700;
 }
 
+/* line 63, ../sass/screen.scss */
+.navbar .lr-form {
+  display: inline;
+  margin: 0;
+}
+
+/* line 68, ../sass/screen.scss */
+.navbar .lr-form input {
+  margin-top: .7em;
+  width: 10em;
+  height: .9em;
+}
+
 /* line 74, ../sass/screen.scss */
-.login-form button {
+.navbar .lr-form button {
   font-size: .9em;
   margin-bottom: .5em;
   padding: .1em .7em;
@@ -122,7 +122,7 @@ h3 {
 }
 
 /* line 103, ../sass/screen.scss */
-.registration-form button {
+.lr-form button {
   font-size: 1.2em;
   letter-spacing: .07em;
   padding: .2em .7em .4em .7em;

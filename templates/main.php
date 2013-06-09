@@ -53,8 +53,8 @@
                         </div>
                         <div class="span6">
                             <? if ($this->show_navbar_login): ?>
-                            <form class="login-form" action="/register" method="post">
-                                <input type="text" placeholder="username" />
+                            <form class="lr-form" action="/login-register" method="post">
+                                <input type="text" placeholder="email" />
                                 <input type="password" placeholder="password" />
                                 <button type="submit" class="btn btn-primary btn-login">login or register</button>
                             </form>
