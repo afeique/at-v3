@@ -3,3 +3,4 @@ settings.php
 db/build.properties
 db/runtime-conf.xml
 db/build/conf/acrosstime-conf.php
+forums/*
