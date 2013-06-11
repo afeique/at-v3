@@ -29,88 +29,48 @@ body {
 }
 
 .navbar-inverse .navbar-inner {
-    @include branding-font;
     background-color: #4d4d4d; // Old browsers
     @include filter-gradient(#4d4d4d, #2d2d2d, vertical); // IE6-9
     @include background-image(linear-gradient(top, #4d4d4d 0%,#2d2d2d 100%));
 }
 
-.navbar-inverse .brand, .nav a {
+.navbar-inverse .brand {
+    color: #4d4d4d;
+    font-size: 1.7em;
     letter-spacing: 0.07em;
+    text-transform: lowercase;
 
+    @include branding-font;
     @include text-shadow(0 -1px 0 rgba(0, 0, 0, 0.25));
-
-    @include transition(color 0.23s ease-out, letter-spacing 0.1s ease-out);
+    @include transition(color 0.23s ease-out);
     @include transition-delay(0s);
 
     &:hover {
-        letter-spacing: 0.23em;
-        @include transition(color 0.23s ease-in, letter-spacing 0.1s ease-in);
+        @include transition(color 0.23s ease-in);
         @include transition-delay(0s);
     }
 }
 
-.navbar-inverse .brand {
-    color: #4d4d4d;
-    font-size: 1.7em;
+.secondary-nav > li > a {
+    text-transform: uppercase;
+
+    @include text-shadow(0 -1px 0 rgba(0, 0, 0, 0.25));
+    @include transition(color 0.23s ease-out);
+    @include transition-delay(0s);
+
+    &:hover {
+        @include transition(color 0.23s ease-in);
+        @include transition-delay(0s);
+    }
 }
 
-.btn-primary {
-    @include branding-font;
-    font-weight: 700;
+a {
+    &:hover {
+        text-decoration: none;
+    }
 }
 
-.navbar .lr-form {
-    display: inline;
+.login-dropdown-form {
     margin: 0;
-}
-
-.navbar .lr-form input {
-    margin-top: .7em;
-    width: 10em;
-    height: .9em;
-}
-
-.navbar .lr-form button {
-    font-size: .9em;
-    margin-bottom: .5em;
-    padding: .1em .7em;
-    letter-spacing: .12em;
-}
-
-h1, h2, h3 {
-    @include branding-font;
-    font-weight: 400;
-}
-
-h1 {
-    font-weight: 2.3em;
-}
-
-h2 {
-    font-size: 1.7em;
-    font-weight: 700;
-}
-
-h3 {
-    font-size: 1.3em;
-}
-
-#frontpage-blurb {
-    text-align: center;  
-}
-
-.lr-form button {
-    font-size: 1.2em;
-    letter-spacing: .07em;
-    padding: .2em .7em .4em .7em;
-}
-
-#frontpage-clock {
-    width: 300px;
-    height: 150;
-}
-
-.error-msg {
-    margin-top: .7em;
+    padding: 1em 1em .5em 1em;
 }

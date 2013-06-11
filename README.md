@@ -27,7 +27,7 @@ External libraries or tools used directly for development, not including depende
 
 * Write [Propel][] `build.properties` and `runtime-conf.xml` files to the specifications of the working database. 
 * Save these files to `/db` alongside `schema.xml`. 
-* Run `propel-gen runtime-conf` inside `/db`. 
+* Run `propel-gen convert-conf` inside `/db`. 
 
 For more information, read the [Propel documentation on building models](http://propelorm.org/documentation/02-buildtime.html#building-the-model).
 

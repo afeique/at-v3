@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>SEO Advice</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>SEO Advice</subitemtitle>
+					<subitemlang>seo_advice</subitemlang>
+					<subsection>advice</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>seo_advice</subitemrolekey>
+					<subisredirect>0</subisredirect>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>Search Activity</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Search Activity</subitemtitle>
+					<subitemlang>seo_dashboard</subitemlang>
+					<subsection>activity</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>seo_activity</subitemrolekey>
+					<subisredirect>0</subisredirect>
+				</subitem>
+			</subitems>
+		</item>
+	</tabitems>
+</menu>
