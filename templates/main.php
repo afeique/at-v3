@@ -44,41 +44,8 @@
     </head>
 
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <ul class="nav">
-                        <li><a class="brand" href="/">acrosstime</a></li>
-                    </ul>
-                    <div class="pull-right">
-                        <ul class="nav secondary-nav">
-                            <li>
-                                <a href="/">not a member? <strong>sign up</strong></a>
-                            </li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="login-dropdown-toggle">
-                                    login <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="login-dropdown-toggle" id="login-dropdown">
-                                    <li>
-                                        <form class="login-dropdown-form">
-                                            <input type="text" placeholder="email" />
-                                            <input type="password" placeholder="password" />
-                                            <div class="pull-right">
-                                                <button type="submit" class="btn btn-success">sign in</button>
-                                            </div>
-                                            <a href="#" class="btn btn-info">recover account</a>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="container" id="main-container">
+        <div class="container">
             <?= $this->content ?>
 
         </div>
