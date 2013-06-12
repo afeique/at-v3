@@ -12,15 +12,34 @@ $klein->respond(function($request, $response, $page) {
     $page->content = '';
     $page->template = 'main';
     $page->use_minified_resources = False;
-    $page->js = new \Acrosstime\JavaScriptCollection(array(array('jquery', 'bootstrap'), array('analytics') ) );
-    $page->show_navbar_login = True;
+    $page->js = new \Acrosstime\JavaScriptCollection(
+        array(
+            array(
+                'angular',
+                'jquery', 'jquery-ui', 'bootstrap', 
+                // load-image plugin -- for preview images and image resizing functionality
+                'load-image',
+                // canvas to blob plugin -- for preview images
+                'canvas-to-blob',
+                // jquery iframe transport plugin -- required for browsers lacking XHR support
+                'jquery.iframe-transport',
+                // jquery file upload
+                'jquery.fileupload', 
+                'jquery.fileupload-process', 
+                'jquery.fileupload-image',
+                'jquery.fileupload-audio',
+                'jquery.fileupload-video',
+                'jquery.fileupload-validate',
+                'jquery.fileupload-angular',
+                ), 
+            array('analytics') 
+            ) 
+        );
 });
 
 $klein->respond('/', function($request, $response, $page) {
     $page->title = '';
     $page->title_separator = '';
-    $page->js->add_sequence('angular');
-    $page->show_navbar_login = False;
 
     ob_start();
     require 'pages/frontpage.php';
