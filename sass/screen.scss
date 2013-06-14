@@ -6,6 +6,13 @@
 @import "compass";
 
 form {
-    margin-top: 5em;
-    text-align: center;
+    margin-top: 7em;
+}
+
+input[type="text"] {
+    width: 100%;
+}
+
+#this {
+    font-weight: 700;
 }

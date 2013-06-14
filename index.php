@@ -15,8 +15,9 @@ $klein->respond(function($request, $response, $page) {
     $page->js = new \Acrosstime\JavaScriptCollection(
         array(
             array(
-                'angular',
-                'jquery', 'jquery-ui', 'bootstrap', 
+                'jquery', 'jquery-ui', 'bootstrap',
+                // javascript template engine -- to render file listing templates
+                'tmpl',
                 // load-image plugin -- for preview images and image resizing functionality
                 'load-image',
                 // canvas to blob plugin -- for preview images
@@ -30,14 +31,14 @@ $klein->respond(function($request, $response, $page) {
                 'jquery.fileupload-audio',
                 'jquery.fileupload-video',
                 'jquery.fileupload-validate',
-                'jquery.fileupload-angular',
+                'fileupload',
                 ), 
             array('analytics') 
             ) 
         );
 });
 
-$klein->respond('/', function($request, $response, $page) {
+$klein->respond('GET', '/', function($request, $response, $page) {
     $page->title = '';
     $page->title_separator = '';
 
@@ -48,10 +49,14 @@ $klein->respond('/', function($request, $response, $page) {
     $page->render('templates/'. $page->template .'.php');
 });
 
+$klein->respond('POST', '/', function($request, $response, $page) {});
+
 $klein->respond('/[:page]?', function($request, $response, $page) {
     $request->page = str_replace('-', '_', $request->param('page') );
-    if (!file_exists('pages/'. $request->page .'.php') )
+    if (!file_exists('pages/'. $request->page .'.php') ) {
         $request->page = '404';
+        $response->sendHeaders(404);
+    }
 
     ob_start();
     require 'pages/'. $request->page .'.php';
