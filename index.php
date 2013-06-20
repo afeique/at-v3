@@ -102,7 +102,7 @@
                 </div>
 
                 <h2>Upload it</h2>
-
+                
                 <!-- Redirect browsers with JavaScript disabled to the origin page -->
                 <noscript><input type="hidden" name="redirect" value="/"></noscript>
                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
