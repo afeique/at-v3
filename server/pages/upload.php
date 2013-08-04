@@ -110,4 +110,3 @@
 		<i class="icon-arrow-right icon-white"></i>
 	</a>
 </div>
-</div>
