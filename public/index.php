@@ -1,6 +1,6 @@
 <?php
 
-define('ROOT', dirname(dirname(__DIR__) ) .'/' );
+define('ROOT', dirname(__DIR__) .'/' );
 define('VIEWS', ROOT .'views/');
 define('LAYOUTS', VIEWS .'layouts/');
 
