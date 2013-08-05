@@ -8,8 +8,8 @@ $klein = new \Klein\Klein();
 
 $klein->respond('[/]?[:page]?', function ($request, $response, $service) {
 	// Header & Footer
-	$service->layout(LAYOUT_DIR .'main.phtml');
-	
+	$service->layout( \AcrossTime\layout('main') );
+		
 	// Page-checking
 	switch($request->page) {
 		case 'upload': 

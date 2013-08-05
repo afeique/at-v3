@@ -4,29 +4,38 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
-@import url(http://fonts.googleapis.com/css?family=Roboto:300|Roboto+Slab:300);
+@import url(http://fonts.googleapis.com/css?family=Roboto:300|Roboto+Slab:400);
 
-.ng-cloak {
-    display: none;
+@mixin branding-font {
+	font-family: 'Roboto Slab', serif;
+	font-weight: 400;
 }
+
+@mixin headline-font {
+	font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: 300;
+}
+
 body {
-    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    padding-top: 40px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding-top: 60px;
 }
 h1 {
-    margin: .7em 0 .3em;
-    font-size: 1.7em;
-    font-family: 'Roboto Slab', serif;
-    font-weight: 300;
+    margin: .7em 0;
+    font-size: 1.4em;
+    @include headline-font;
 }
 h2 {
-    margin: .7em 0 .4em;
-    font-size: 1.4em;
-    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 300;
+    margin: .7em 0;
+    font-size: 1.2em;
+    @include headline-font;
+}
+.navbar-brand {
+	@include branding-font;
 }
 input {
-    width: 100%;
+	@include headline-font;
 }
-input[type="submit"] {   
+.nav a {
+	@include headline-font;
 }
