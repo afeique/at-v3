@@ -4,6 +4,7 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
+@import "compass/css3";
 @import url(http://fonts.googleapis.com/css?family=Roboto:300|Roboto+Slab:400);
 
 @mixin branding-font {
@@ -16,9 +17,17 @@
 	font-weight: 300;
 }
 
+@mixin body-font {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: 400;
+}
+
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    @include body-font;
     padding-top: 60px;
+}
+a:hover {
+	text-decoration: none;
 }
 h1 {
     margin: .7em 0;
@@ -36,6 +45,45 @@ h2 {
 input {
 	@include headline-font;
 }
+.navbar a {
+	@include transition(color .2s ease-in-out 0s);
+}
 .nav a {
 	@include headline-font;
+}
+.signin-dropdown {
+	left: auto;
+	right: 0;
+	width: auto;
+}
+.signin-form {
+	padding: .7em 1em;
+}
+.signin-form label {
+	margin-top: .7em;
+}
+.signin-form span {
+	color: #777;
+	@include headline-font;
+	font-size: .9em;
+}
+.signin-form input {
+	margin-top: .3em;
+	@include body-font;
+}
+.signin-form button {
+	margin-top: .7em;
+}
+.footer-links {
+	margin-top: .7em;
+}
+.footer-links a {
+	@include body-font;
+	font-size: .8em;
+	line-height: 1.4em;
+}
+.glyphicon {
+	vertical-align: middle;
+	margin-left: .3em; 
+	margin-right: .3em;
 }

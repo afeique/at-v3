@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="/css/bootstrap.min.css" rel="stylesheet" media="screen" type="text/css" />
 	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen" type="text/css" />
-	<link href="/css/bootstrap-image-gallery.min.css" rel="stylesheet" type="text/css" />
+	<link href="/css/bootstrap-glyphicons.min.css" rel="stylesheet" media="screen" type="text/css" />
 	<link href="/css/jquery.fileupload-ui.css" rel="stylesheet" type="text/css" />
 	<noscript>
 		<link href="/css/jquery.fileupload-ui-noscript.css" rel="stylesheet" type="text/css" />
@@ -42,13 +42,56 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">acrossti.me</a>
+			<a class="navbar-brand" id="navbar-brand" href="#">acrossti.me</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#about">timeline</a></li>
-					<li><a href="#contact">upload</a></li>
+					<li class=""><a href="#about">timeline</a></li>
+					<li class=""><a href="#contact">upload</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
+			<div class="pull-right">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="glyphicon glyphicon-asterisk"></span> <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu signin-dropdown" role="menu" aria-labelledby="dropdownMenu">
+							<li class="signin-form">
+								<form action="/forums/index.php?app=core&module=global&section=login&do=process" method="post">
+									<input type="hidden" name="auth_key" value="880ea6a14ea49e853634fbdc5015a024" />
+									<input type="hidden" name="referer" value="" />
+									<fieldset>
+										<label>
+											<span>username</span>
+											<input type="text" name="ips_username" class="form-control" />
+										</label>
+										<label>
+											<span>password</span>
+											<input type="password" name="ips_password" class="form-control" />
+										</label>
+									</fieldset>
+									<fieldset class="subchk">
+										<label>
+											<input type="checkbox" value="1" checked="checked" name="rememberMe" />
+											<span>remember me</span>
+										</label>
+										<label>
+											<input type="checkbox" value="1" name="anonymous" />
+											<span>anonymous</span>
+										</label>
+										<button type="submit" class="btn btn-default">sign in <span class="glyphicon glyphicon-circle-arrow-right"></span></button>
+									</fieldset>
+								</form>
+								<p class="footer-links">
+									<a href="/forums/index.php?app=core&module=global&section=lostpass"><span class="glyphicon glyphicon-question-sign"></span> forgot password</a>
+									<br />
+									<a href="/forums/index.php?app=core&module=global&section=register"><span class="glyphicon glyphicon-cog"></span> register</a>
+								</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 
