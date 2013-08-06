@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" href='/favicon.ico' />
+
+	<link rel="stylesheet" type="text/css" title="Main" media="screen,print" href="/forums/public/style_css/css_1/ipb_styles.css">
+
+	<meta http-equiv="refresh" content="10;url=<?= $this->redirect ?>">
+
+	<title>Please stand by...</title>
+	
+	<?php /*
+	<link rel="stylesheet" type="text/css" title="Main" media="screen" href="http://local.acrossti.me/forums/public/style_css/css_1/calendar_select.css">
+			
+	<link rel="stylesheet" type="text/css" title="Main" media="screen,print" href="http://local.acrossti.me/forums/public/style_css/css_1/ipb_ckeditor.css">
+			
+	<link rel="stylesheet" type="text/css" title="Main" media="screen,print" href="http://local.acrossti.me/forums/public/style_css/css_1/ipb_common.css">
+			
+	<link rel="stylesheet" type="text/css" title="Main" media="screen,print" href="http://local.acrossti.me/forums/public/style_css/css_1/ipb_editor.css">
+			
+	<link rel="stylesheet" type="text/css" title="Main" media="screen,print" href="http://local.acrossti.me/forums/public/style_css/css_1/ipb_login_register.css">
+	*/ ?>
+
+</head>
+
+<body  id='ipboard_body' class='redirector'>
+	<div id='ipbredirectwrapper'>
+		<p class='message<? if ($this->error): ?> error<? endif; ?>'>
+			<?= $this->yieldView() ?>
+		</p>
+	</div>
+</body>
