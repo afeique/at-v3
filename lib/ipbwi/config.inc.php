@@ -17,7 +17,7 @@
 	 * Example path: '/home/public_html/community/forums/'
 	 */
 	if(!defined('ipbwi_BOARD_PATH')){
-		define('ipbwi_BOARD_PATH','/home/ctcorg/public_dev.members/forums/');
+		define('ipbwi_BOARD_PATH','/var/www/at/public/forums/');
 	}
 	
 	/**
@@ -37,7 +37,7 @@
 	 * Example path: '/home/public_html/website/ipbwi/'
 	 */
 	if(!defined('ipbwi_ROOT_PATH')){
-		define('ipbwi_ROOT_PATH','/home/ctcorg/public_dev.members/ipbwi/');
+		define('ipbwi_ROOT_PATH','/var/www/at/lib/ipbwi/');
 	}
 
 	/**
@@ -47,7 +47,7 @@
 	 * Example url: 'http://ipbwi.com/examples/'
 	 */
 	if(!defined('ipbwi_WEB_URL')){
-		define('ipbwi_WEB_URL','http://dev.members.certifiedtaxcoach.org/pricebuilder/');
+		define('ipbwi_WEB_URL','http://local.acrossti.me/');
 	}
 
 	/**
@@ -61,7 +61,7 @@
 	 * Example for subdomain: .site.domain.com
 	 */
 	if(!defined('ipbwi_COOKIE_DOMAIN')){
-		define('ipbwi_COOKIE_DOMAIN','.certifiedtaxcoach.org');
+		define('ipbwi_COOKIE_DOMAIN','.local.acrossti.me');
 	}
 
 	/**

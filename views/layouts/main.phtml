@@ -51,6 +51,8 @@
 			</div><!--/.nav-collapse -->
 			<div class="pull-right">
 				<ul class="nav navbar-nav">
+
+					<? if ( !($this->ipbwi->member->isLoggedIn()) ): ?>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 							<span class="glyphicon glyphicon-asterisk"></span> <span class="caret"></span>
@@ -59,7 +61,7 @@
 							<li class="signin-form">
 								<form action="/forums/index.php?app=core&module=global&section=login&do=process" method="post">
 									<input type="hidden" name="auth_key" value="880ea6a14ea49e853634fbdc5015a024" />
-									<input type="hidden" name="referer" value="" />
+									<input type="hidden" name="referer" value="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>" />
 									<fieldset>
 										<label>
 											<span>username</span>
@@ -70,7 +72,7 @@
 											<input type="password" name="ips_password" class="form-control" />
 										</label>
 									</fieldset>
-									<fieldset class="subchk">
+									<fieldset>
 										<label>
 											<input type="checkbox" value="1" checked="checked" name="rememberMe" />
 											<span>remember me</span>
@@ -79,17 +81,51 @@
 											<input type="checkbox" value="1" name="anonymous" />
 											<span>anonymous</span>
 										</label>
-										<button type="submit" class="btn btn-default">sign in <span class="glyphicon glyphicon-circle-arrow-right"></span></button>
+										<button type="submit" class="btn btn-default">sign in <span class="glyphicon glyphicon-share-alt"></span></button>
 									</fieldset>
 								</form>
 								<p class="footer-links">
 									<a href="/forums/index.php?app=core&module=global&section=lostpass"><span class="glyphicon glyphicon-question-sign"></span> forgot password</a>
 									<br />
-									<a href="/forums/index.php?app=core&module=global&section=register"><span class="glyphicon glyphicon-cog"></span> register</a>
+									<a href="/forums/index.php?app=core&module=global&section=register"><span class="glyphicon glyphicon-plus"></span> register</a>
 								</p>
 							</li>
 						</ul>
 					</li>
+					<? else: ?>
+					<li class="dropdown">
+						<? $m = $this->ipbwi->member->info(); ?>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu quick-settings" role="menu" aria-labelledby="dropdownMenu">
+							<li class="dropdown-header">
+								WELCOME
+							</li>
+							<li>
+								<span><strong><?= $m['members_display_name'] ?></strong></span>
+								<a href="/forums/index.php?app=core&module=usercp">
+									<small>edit settings</small>
+								</a>
+							</li>
+							<li class="dropdown-header">TOOLS</li>
+							<? if ($this->ipbwi->member->isAdmin()): ?>
+							<li>
+								<a href="/forums/admin/index.php" target="_blank">admin panel</a>
+							</li>
+							<? endif; ?>
+							<? if ($this->ipbwi->member->isSuperMod()): ?>
+							<li>
+								<a href="/forums/index.php?app=core&module=modcp">moderator panel</a>
+							</li>
+							<li class="dropdown-header">ACTIONS</li>
+							<li>
+								<a href="/forums/index.php?app=core&module=global&section=login&do=logout&k=33a6968473e52e61fd50065afcc42a55">logout</a>
+							</li>
+						<? endif; ?>
+						</ul>
+					</li>
+					<? endif; ?>
 				</ul>
 			</div>
 		</div>
