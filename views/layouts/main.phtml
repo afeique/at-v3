@@ -6,6 +6,8 @@
 	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" href='/favicon.ico' />
+
 	<link href="/css/bootstrap.min.css" rel="stylesheet" media="screen" type="text/css" />
 	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen" type="text/css" />
 	<link href="/css/bootstrap-glyphicons.min.css" rel="stylesheet" media="screen" type="text/css" />
@@ -31,7 +33,7 @@
 			);
 	</script>
 
-	<title>acrossti.me</title>
+	<title>acrossti.me<? if (isset($this->title)): ?> | <?= $this->title ?><? endif; ?></title>
 </head>
 
 <body>
@@ -55,21 +57,20 @@
 					<? if ( !($this->ipbwi->member->isLoggedIn()) ): ?>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							<span class="glyphicon glyphicon-asterisk"></span> <span class="caret"></span>
+							sign in <span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu signin-dropdown" role="menu" aria-labelledby="dropdownMenu">
 							<li class="signin-form">
-								<form action="/forums/index.php?app=core&module=global&section=login&do=process" method="post">
-									<input type="hidden" name="auth_key" value="880ea6a14ea49e853634fbdc5015a024" />
-									<input type="hidden" name="referer" value="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>" />
+								<form action="/signin" method="post">
+									<input type="hidden" name="redirect" value="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>" />
 									<fieldset>
 										<label>
 											<span>username</span>
-											<input type="text" name="ips_username" class="form-control" />
+											<input type="text" name="username" class="form-control" />
 										</label>
 										<label>
 											<span>password</span>
-											<input type="password" name="ips_password" class="form-control" />
+											<input type="password" name="password" class="form-control" />
 										</label>
 									</fieldset>
 									<fieldset>
@@ -96,31 +97,41 @@
 					<li class="dropdown">
 						<? $m = $this->ipbwi->member->info(); ?>
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+							<?= $m['members_display_name'] ?>
+						<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu quick-settings" role="menu" aria-labelledby="dropdownMenu">
 							<li class="dropdown-header">
 								WELCOME
 							</li>
 							<li>
-								<span><strong><?= $m['members_display_name'] ?></strong></span>
 								<a href="/forums/index.php?app=core&module=usercp">
-									<small>edit settings</small>
+									<span class="glyphicon glyphicon-cog"></span>
+									my settings
 								</a>
 							</li>
 							<li class="dropdown-header">TOOLS</li>
 							<? if ($this->ipbwi->member->isAdmin()): ?>
 							<li>
-								<a href="/forums/admin/index.php" target="_blank">admin panel</a>
+								<a href="/forums/admin/index.php" target="_blank">
+									<span class="glyphicon glyphicon-wrench"></span>
+									admin panel
+								</a>
 							</li>
 							<? endif; ?>
 							<? if ($this->ipbwi->member->isSuperMod()): ?>
 							<li>
-								<a href="/forums/index.php?app=core&module=modcp">moderator panel</a>
+								<a href="/forums/index.php?app=core&module=modcp">
+									<span class="glyphicon glyphicon-user"></span>
+									moderator panel
+								</a>
 							</li>
 							<li class="dropdown-header">ACTIONS</li>
 							<li>
-								<a href="/forums/index.php?app=core&module=global&section=login&do=logout&k=33a6968473e52e61fd50065afcc42a55">logout</a>
+								<a href="/signout?redirect=<?= urlencode("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]") ?>">
+									<span class="glyphicon glyphicon-off"></span>
+									sign out
+								</a>
 							</li>
 						<? endif; ?>
 						</ul>

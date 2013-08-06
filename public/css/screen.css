@@ -176,21 +176,14 @@ input {
 /* line 85, ../../sass/screen.scss */
 .glyphicon {
   vertical-align: middle;
-  margin-left: .3em;
-  margin-right: .3em;
 }
 
-/* line 90, ../../sass/screen.scss */
-.quick-settings span {
-  padding: 3px 20px;
-}
-
-/* line 93, ../../sass/screen.scss */
+/* line 88, ../../sass/screen.scss */
 .quick-settings strong {
   font-weight: 700;
 }
 
-/* line 96, ../../sass/screen.scss */
+/* line 91, ../../sass/screen.scss */
 .quick-settings a {
   font-size: 85%;
 }
