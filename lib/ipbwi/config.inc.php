@@ -17,7 +17,7 @@
 	 * Example path: '/home/public_html/community/forums/'
 	 */
 	if(!defined('ipbwi_BOARD_PATH')){
-		define('ipbwi_BOARD_PATH','/var/www/at/public/forums/');
+		define('ipbwi_BOARD_PATH', FORUM_DIR );
 	}
 	
 	/**
@@ -27,7 +27,7 @@
 	 * Example path: '/home/public_html/community/forums/admin/'
 	 */
 	if(!defined('ipbwi_BOARD_ADMIN_PATH')){
-		define('ipbwi_BOARD_ADMIN_PATH',ipbwi_BOARD_PATH.'admin/');
+		define('ipbwi_BOARD_ADMIN_PATH', ipbwi_BOARD_PATH . 'admin/');
 	}
 
 	/**
@@ -37,7 +37,7 @@
 	 * Example path: '/home/public_html/website/ipbwi/'
 	 */
 	if(!defined('ipbwi_ROOT_PATH')){
-		define('ipbwi_ROOT_PATH','/var/www/at/lib/ipbwi/');
+		define('ipbwi_ROOT_PATH', LIB_DIR . 'ipbwi/');
 	}
 
 	/**
@@ -47,7 +47,7 @@
 	 * Example url: 'http://ipbwi.com/examples/'
 	 */
 	if(!defined('ipbwi_WEB_URL')){
-		define('ipbwi_WEB_URL','http://local.acrossti.me/');
+		define('ipbwi_WEB_URL', ROOT_URL . '/' );
 	}
 
 	/**

@@ -67,10 +67,13 @@ $klein->respond('/signout', function ($request, $response, $service) {
 	$service->render( \AcrossTime\view('redirect-message') );
 });
 
-$klein->respond('/', function ($request, $response, $service) {
+$klein->respond('[/]?[:page]?', function ($request, $response, $service) {
 	
 	// Page-checking
 	switch($request->page) {
+		case 'timeline':
+			$service->render( \AcrossTime\view('timeline') );
+		break;
 		case 'upload': 
 		case '':
 			$service->render( \AcrossTime\view('upload') );
