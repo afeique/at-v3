@@ -106,7 +106,7 @@ $klein->respond('[/]?[:page]?', function ($request, $response, $service) {
 	// Page-checking
 	switch($request->page) {
 		case 'timeline':
-			$service->js->add_script($sequence_index=0, $script='timeline', $relative_to='angular', $insert_after=True);
+			$service->js->add_script($sequence_index=0, $script='timeline');
 			$service->render( \AcrossTime\view('timeline') );
 		break;
 		case 'upload': 
