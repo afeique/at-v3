@@ -1,133 +1,89 @@
 <!-- Timer & Timeline -->
 
-<div ng-app="timelineApp" >
-
-<div class="row-fluid ">
-	<ul class="nav nav-tabs col-lg-4" id="tasknav">
-	  <li class="active"><a href="#timetask" data-toggle="tab">Time Task</a></li>
-	  <li><a href="#logtask" data-toggle="tab">Log Task</a></li>
-	  <li><a href="#pomodoro" data-toggle="tab">Pomodoro</a></li>
-	</ul>
+<div class="row">
+	<div class="col-lg-4">
+		<ul class="nav nav-tabs" id="tasknav">
+			<li class="active"><a href="#logtask" data-toggle="tab">Log Task</a></li>
+		</ul>
+	</div>
+	<div class="col-lg-8">
+		<div style="height: 44px">
+			&nbsp;
+		</div>
+	</div>
 </div>
 
-<div class="row-fluid trim-margins">
+<div class="row">
 	<div class="col-lg-4" style="margin-top: 15px">
+	
 		<div class="panel panel-nav">
-			<div class="row-fluid">
+			<div class="panel-body">
+			
 				<div class="tab-content">
-				
-					<!-- Actively time tasks-->
-					<div class="tab-pane active" id="timetask" ng-controller="TimerCtrl">
-						<form id="recordtask" action="/upload" method="post">
-							<div class="row-fluid margin-inner-child slide-frame" data-ng-switch="taskStage" data-ng-animate="'wave'" >
-							
-								<div ng-switch-when="0">
-									<div class="input-group">
-										<input id="task" name="task" type="text" class="form-control" placeholder="Whatchu workin' on?" />
-										<div class="input-group-btn">
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-											<!-- Retrieve projects from server-side here, sorry 'bout using my projects as placeholders :P -->
-											<ul class="dropdown-menu pull-right">
-												<li><a href="#">AcrossTime</a></li>
-												<li><a href="#">IUAM Website</a></li>
-												<li><a href="#">VegIU Website</a></li>
-											</ul>
-										</div><!-- /btn-group -->
-									</div><!-- /input-group -->
-									
-									<!-- TODO: Auto expand http://jsfiddle.net/gLhCk/5/ -->
-									<textarea class="form-control vert" rows="3" placeholder="What do you plan to get done?" ></textarea>
-									
-									<button type="button" class="btn btn-warning btn-success btn-block" ng-click="startTask()">
-										<i class="glyphicon glyphicon-play icon-white"></i>
-										<span>Start Task</span>
-									</button>
-								</div> <!--/.ng-hide="taskStarted" -->
-								
-								<!-- Timer AngularJS form -->
-								<div ng-switch-when="1">
-									<!-- Just a placeholder -->
-									<div class="row-fluid inline-inner middle-inner">
-										<button type="button" class="close">&times;</button>
-										<label>
-											<h1 class="inline">{{task.title}}</h1>
-										</label>
-										<p>{{task.description}}</p>
-									</div>
-									
-									<!-- Timer widget -->
-									<div class="timer" wg-timer="{since: 'new Date()', compact: true}"></div>
-									
-									<!-- Timer controls -->
-									<button type="button" class="btn btn-warning btn-block" ng-click="pauseTimer()" >
-										<i class="glyphicon icon-white glyphicon-pause"></i>
-										<span>Pause</span>
-									</button>
-									<button type="button" class="btn btn-danger btn-block" ng-click="endTask()" >
-										<i class="glyphicon icon-white glyphicon-stop"></i>
-										<span>End Task</span>
-									</button>
-								</div> <!-- /ng-show="taskStarted" -->
-								
-								<!-- Reflection & Logging to server -->
-								<div ng-switch-when="2">
-									<!-- This flavor text needs work! -->
-									<select class="form-control">
-										<option disabled selected>How focused were you?</option>
-										<option>1 - Uh, I was timing this?</option>
-										<option>2 - </option>
-										<option>3 - </option>
-										<option>4 - </option>
-										<option>5 - </option>
-										<option>6 - Average. Got stuff done at my usual pace.</option>
-										<option>7 - </option>
-										<option>8 - </option>
-										<option>9 - Deep state of flow, unprecedented productivity.</option>
-										<option>10 - I am Neo and this is the Matrix.</option>
-									</select>
-									<textarea class="form-control vert" rows="3" placeholder="What did you get done?" ></textarea>
-								</div><!-- /ng-show="taskFinished" -->
-								
-							</div><!-- /.row-fluid ng-switch -->
-						</form>
-					</div><!-- /.tab-pane & TimerCtrl -->
-					
+
 					<!-- Log tasks completed AFK -->
-					<div class="tab-pane" id="logtask" ng-controller="LogCtrl">
-						<form id="recordtask" action="/upload" method="post">
-							<fieldset>
-								<input id="task" name="task" type="text" class="form-control margin" placeholder="Task Title" />
-								<textarea class="form-control margin vert" rows="3" placeholder="Task Description" ></textarea>
+					<div class="tab-pane active" id="logtask">
+
+						<form id="recordtask" action="/upload" method="post" role="form">
+							<div class="form-group">
+								<input id="task" name="task" type="text" class="form-control" placeholder="Whatchu worked on?" />
+							</div>
+							<div class="form-group">
+								<textarea class="form-control vert" rows="3" placeholder="What did you get done?" ></textarea>
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-success btn-block">
+									Submit
+								</button>
+							</div>	
+								
+								<!-- TODO: Image upload -->
 								<!-- TODO: Time Spent -->
 								<!-- TODO: Date Picker -->
-							</fieldset>
-						</form>
-					</div>
 
-					<!-- For Pomodoro enthusiasts -->
-					<div class="tab-pane" id="pomodoro" ng-controller="PomodoroCtrl">
-						<p>Pomodoro</p>
+						</form>
+
 					</div>
 					
+					
 				</div><!-- /.tab-content -->
-			</div><!-- /.row-fluid -->
+				
+			</div><!--/.panel-body-->
 		</div><!-- /.panel-nav -->
+		
 	</div><!-- /.col-lg-4 -->
 	
-	<!-- Timeline, retrieved from Database -->
-	<div class="col-lg-8" ng-controller="TimelineCtrl">
-		<div class="row-fluid">
-			<div ng-repeat="item in timeline">
-				<div id="{{item.id}}" class="col-lg-4 timeline-item-container">
-					<div class="timeline-item-content">
-						<h2>{{item.title}}</h2>
-						<p class="margin">{{item.description}}</p>
-					</div>
+	<!-- TODO: Graphical representation of user's timeline -->
+	<div class="col-lg-8">
+		<div class="panel">
+				<div class="panel-body">
+					<p class="text-success">TODO: Graphical representation of user's timeline</p>
 				</div>
-			</div> <!-- /.ng-repeat -->
-		</div><!-- /.row-fluid -->
+		</div>
+	</div>
+	
+</div><!-- /.row -->
+
+<div class="row">
+
+	<!-- Timeline, retrieved from Database -->
+	<div class="col-xs-12">
+
+		
+			<!-- Loading, displayed while retrieving timeline -->
+			<div id="loading-timeline" class="panel">
+				<div class="panel-body">
+					<p><img src="img/preloader.gif" alt="Preloader"/> Loading collections...</p>
+				</div>
+			</div>
+		
+			<!-- Filled with isotope of timeline stuff -->
+			<div id="timeline">
+				
+			</div>
+			
+			
+
 	</div><!-- /.col-lg-8 & TimelineCtrl -->
 	
-</div><!-- /.row-fluid -->
-
-</div> <!-- /timelineApp -->
+</div> <!-- /.row -->	

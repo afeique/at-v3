@@ -9,8 +9,6 @@
 	<link rel="shortcut icon" href='/favicon.ico' />
 
 	<link href="/css/bootstrap.min.css" rel="stylesheet" media="screen" type="text/css" />
-	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen" type="text/css" />
-	<link href="/css/bootstrap-glyphicons.min.css" rel="stylesheet" media="screen" type="text/css" />
 	<link href="/css/jquery.fileupload-ui.css" rel="stylesheet" type="text/css" />
 	<noscript>
 		<link href="/css/jquery.fileupload-ui-noscript.css" rel="stylesheet" type="text/css" />
@@ -151,10 +149,15 @@
 	</div>
 
 	<div class="container">
-		<? $this->yieldView(); //The view is rendered here ?>
+		
+		<div id="main">
+			<? $this->yieldView(); //The view is rendered here ?>
+		</div>
 
 		<div id="footer" class="panel">
-			<p>acrossti.me &copy; 2013</p>
+			<div class="panel-body">
+				<p>acrossti.me &copy; 2013</p>
+			</div>
 		</div>
 	</div>
 </body>

@@ -1,12 +1,50 @@
 // Instead of document.ready();
 head.ready(function() {
+	
+	var timeline;
+	
+	// Bootstrap tab handling
 	$('#tasknav a').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
 	});
+	
+	// Load timeline from server
+	$.get('/get/timeline', timelineCallback );
+	
+	function timelineCallback( data ) {
+		
+		timeline = JSON.parse(data);
+		console.log( timeline );
+		
+		// Process server data into #timeline
+		$.each( timeline, function( i, e ) {
+			var item = $('<div/>');
+			item.append('<p class="text-muted">' + e.when + '</p>');
+			item.append('<h2>' + e.title + '</h2>');
+			item.append('<p>' + e.description + '</p>');
+			
+			item.wrapInner('<div class="item-inner"/>');
+			item.addClass('item');
+			
+			$('#timeline').append( item )
+		});
+		
+		// Trigger isotope
+		$('#timeline').isotope({
+			itemSelector : '.item',
+			layoutMode : 'sloppyMasonry'
+		}, function() {
+			$('#loading-timeline').slideUp();
+		});
+		
+	}
+	
+	
+	
 });
 
-var module = angular.module("timelineApp", [] );
+/* Removed temporarily - 11/25/13
 
 // Angular turns "wgTimer" into "wg-timer"
 module.directive('wgTimer', function() {
@@ -26,8 +64,9 @@ module.directive('wgTimer', function() {
 		}
     };
 });
+// */
 
-
+/* Removed temporarily - 11/25/13
 function TimerCtrl($scope) {
 	$scope.timerGoing = false; // widget var
 	$scope.taskStarted = false;
@@ -54,20 +93,10 @@ function TimerCtrl($scope) {
 		$scope.timerGoing = ! $scope.timerGoing;
 	}
 }
+// */
 
-function LogCtrl($scope) {
-	// TODO: Allow people to log task completed AFK
-}
-
+/* Removed temporarily - 11/25/13
 function PomodoroCtrl($scope) {
 	// TODO: Pomodoro Mode. Incorporate into TaskCtrl?
 }
-
-function TimelineCtrl($scope, $http) {
-	$scope.timeline;
-	$http.get('/get/timeline').then( function(response){
-		$scope.timeline = response.data;
-		console.log($scope.timeline);
-	});
-	
-}
+// */

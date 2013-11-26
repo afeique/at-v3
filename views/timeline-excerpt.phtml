@@ -1,0 +1,88 @@
+<!-- I've stripped out this code from timeline.phtml, to be replaced when we're ready -->
+
+		  <li><a href="#timetask" data-toggle="tab">Time Task</a></li>
+		  <li><a href="#pomodoro" data-toggle="tab">Pomodoro</a></li>
+
+
+
+					<!-- Actively time tasks-->
+					<div class="tab-pane" id="timetask" ng-controller="TimerCtrl">
+						<form id="recordtask" action="/upload" method="post">
+							<div class="row margin-inner-child slide-frame" data-ng-switch="taskStage" data-ng-animate="'wave'" >
+							
+								<div ng-switch-when="0">
+									<div class="input-group">
+										<input id="task" name="task" type="text" class="form-control" placeholder="Whatchu workin' on?" />
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+											<!-- Retrieve projects from server-side here, sorry 'bout using my projects as placeholders :P -->
+											<ul class="dropdown-menu pull-right">
+												<li><a href="#">AcrossTime</a></li>
+												<li><a href="#">IUAM Website</a></li>
+												<li><a href="#">VegIU Website</a></li>
+											</ul>
+										</div><!-- /btn-group -->
+									</div><!-- /input-group -->
+									
+									<!-- TODO: Auto expand http://jsfiddle.net/gLhCk/5/ -->
+									<textarea class="form-control vert" rows="3" placeholder="What do you plan to get done?" ></textarea>
+									
+									<button type="button" class="btn btn-warning btn-success btn-block" ng-click="startTask()">
+										<span class="glyphicon glyphicon-play icon-white"></span>
+										<span>Start Task</span>
+									</button>
+								</div> <!--/.ng-hide="taskStarted" -->
+								
+								<!-- Timer AngularJS form -->
+								<div ng-switch-when="1">
+									<!-- Just a placeholder -->
+									<div class="row-fluid inline-inner middle-inner">
+										<button type="button" class="close">&times;</button>
+										<label>
+											<h1 class="inline">{{task.title}}</h1>
+										</label>
+										<p>{{task.description}}</p>
+									</div>
+									
+									<!-- Timer widget -->
+									<div class="timer" wg-timer="{since: 'new Date()', compact: true}"></div>
+									
+									<!-- Timer controls -->
+									<button type="button" class="btn btn-warning btn-block" ng-click="pauseTimer()" >
+										<i class="glyphicon icon-white glyphicon-pause"></i>
+										<span>Pause</span>
+									</button>
+									<button type="button" class="btn btn-danger btn-block" ng-click="endTask()" >
+										<i class="glyphicon icon-white glyphicon-stop"></i>
+										<span>End Task</span>
+									</button>
+								</div> <!-- /ng-show="taskStarted" -->
+								
+								<!-- Reflection & Logging to server -->
+								<div ng-switch-when="2">
+									<!-- This flavor text needs work! -->
+									<select class="form-control">
+										<option disabled selected>How focused were you?</option>
+										<option>1 - Uh, I was timing this?</option>
+										<option>2 - Disappointed in myself.</option>
+										<option>3 - Bah! More distractions than work.</option>
+										<option>4 - Not bad, but not up to par.</option>
+										<option>5 - Average. Got stuff done at my usual pace.</option>
+										<option>6 - Not bad, but could be better!</option>
+										<option>7 - Truly satisfied with my work.</option>
+										<option>8 - Raised the bar for myself!</option>
+										<option>9 - Deep state of flow, rare and sustained productivity.</option>
+										<option>10 - I am Neo and this is the Matrix.</option>
+									</select>
+									<textarea class="form-control vert" rows="3" placeholder="What did you get done?" ></textarea>
+								</div><!-- /ng-show="taskFinished" -->
+								
+							</div><!-- /.row ng-switch -->
+						</form>
+					</div><!-- /.tab-pane & TimerCtrl -->
+
+					<!-- For Pomodoro enthusiasts -->
+					<div class="tab-pane" id="pomodoro" ng-controller="PomodoroCtrl">
+						<p>Pomodoro</p>
+					</div>
+				
