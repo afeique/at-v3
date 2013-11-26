@@ -14,7 +14,16 @@ $klein->respond(function ($request, $response, $service, $app) use ($ipbwi) {
 	$service->ipbwi = $ipbwi;
 
 	// create default JavaScript collection
-	$service->js = new \Acrosstime\JavaScriptCollection(array(array('jquery.min', 'bootstrap.min', 'jquery.countdown', 'jquery.isotope.min', 'jquery.isotope.sloppy-masonry.min', 'angular.min') ) );
+	$service->js = new \Acrosstime\JavaScriptCollection( array( array( 
+		'jquery.min',
+		'jquery-ui.min',
+		'jquery-ui-timepicker-addon.min',
+		'bootstrap.min',
+		'jquery.countdown',
+		'jquery.isotope.min',
+		'jquery.isotope.sloppy-masonry.min',
+		'angular.min'
+	)));
 
 	// default Header & Footer
 	$service->layout( \AcrossTime\layout('main') );

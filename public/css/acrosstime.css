@@ -1,6 +1,9 @@
 /* GLOBAL SETTINGS */
-body { background: url("/img/noisy-texture-100x100-o3-d10-c-ededed-t0.png"); }
+body { background: url("/img/noisy-texture-100x100-o3-d10-c-ededed-t0.png"); font-size: 14px; }
 #main {	}
+
+/* Higher than isotope */
+.ui-widget { z-index: 3 !important; position: relative; }
 
 /* HELPER CLASSES */
 textarea { resize:both; } /* none|horizontal|vertical|both */
@@ -9,7 +12,7 @@ textarea.noResize { resize:none; }
 
 /* TIMELINE PAGE */
 .panel-nav {
-	margin-top: -15px;
+
 	border-top: none !important;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
@@ -32,22 +35,37 @@ textarea.noResize { resize:none; }
 	width: 25%;
 }
 
+/* Matches Bootstrap's -sm- breakpoint */
+@media (max-width: 767px) {
+	.item  {	width: 33%;	}
+}
+
+/* Arbitrary */
+@media (max-width: 599px) {
+	.item  {	width: 50%;	}
+}
+
+/* Arbitrary */
+@media (max-width: 400px) {
+	.item  {	width: 100%;	}
+}
+
+/* For when we get around to image upload */
 .item img {
 	background-image: url('../img/preloader.gif');
 	background-repeat: no-repeat;
 	background-position: center center;
+	
+	margin-top: 10px;
+	width: 100%;
 }
 
+/* Necessary for proper spacing a la Bootstrap */
 .item-inner {
 	background-color: white;
 	border: 1px solid #ddd;
 	border-radius: 4px;
 	padding: 5px;
-}
-
-.item img {
-	width: 100%;
-	margin-bottom: 5px;
 }
 
 .item a {
@@ -125,3 +143,16 @@ textarea.noResize { resize:none; }
 }
 
 /* End: Recommended Isotope styles */
+
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 45%; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.ui-timepicker-rtl{ direction: rtl; }
+.ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
+.ui-timepicker-rtl dl dt{ float: right; clear: right; }
+.ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }

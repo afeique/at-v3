@@ -6,15 +6,11 @@
 			<li class="active"><a href="#logtask" data-toggle="tab">Log Task</a></li>
 		</ul>
 	</div>
-	<div class="col-lg-8">
-		<div style="height: 44px">
-			&nbsp;
-		</div>
-	</div>
+
 </div>
 
 <div class="row">
-	<div class="col-lg-4" style="margin-top: 15px">
+	<div class="col-lg-4">
 	
 		<div class="panel panel-nav">
 			<div class="panel-body">
@@ -24,18 +20,45 @@
 					<!-- Log tasks completed AFK -->
 					<div class="tab-pane active" id="logtask">
 
-						<form id="recordtask" action="/upload" method="post" role="form">
+						<form id="recordtask" role="form" class="form-horizontal">
 							<div class="form-group">
-								<input id="task" name="task" type="text" class="form-control" placeholder="Whatchu worked on?" />
+								<div class="col-xs-12">
+									<input id="task" type="text" class="form-control" placeholder="Whatchu worked on?" />
+								</div>
 							</div>
 							<div class="form-group">
-								<textarea class="form-control vert" rows="3" placeholder="What did you get done?" ></textarea>
+								<div class="col-xs-12">
+									<textarea id="description" class="form-control vert" rows="3" placeholder="What did you get done?" ></textarea>
+								</div>
+							</div>
+							<!--
+							<div class="form-group">
+								<div class="col-xs-12">
+										<label class="control-label">
+											<input type="checkbox"> Enable date entry
+										</label>
+								</div>
+							</div>
+							-->
+							<div class="form-group">
+								<label class="control-label col-xs-2">Start</label>
+								<div class="col-xs-10">
+									<input id="start" type="text" class="form-control" placeholder="e.g. 12/20/13 1:00 pm" />
+								</div>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-success btn-block">
-									Submit
-								</button>
-							</div>	
+								<label class="control-label col-xs-2">Finish</label>
+								<div class="col-xs-10">
+									<input id="end" type="text" class="col-xs-6 form-control" placeholder="e.g. 12/20/13 3:00 pm" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-12">
+									<button type="submit" class="btn btn-success btn-block">
+										Submit
+									</button>
+								</div>
+							</div>
 								
 								<!-- TODO: Image upload -->
 								<!-- TODO: Time Spent -->

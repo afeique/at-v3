@@ -9,6 +9,16 @@ head.ready(function() {
 		$(this).tab('show');
 	});
 	
+	/*
+	$('#start,#end').datetimepicker({
+		timeFormat: "hh:mm tt",
+		dateFormat: "mm/dd/y",
+		showOn: "button",
+		buttonImage: "/img/clock-icon.png",
+		buttonImageOnly: true
+	}).wrap('<div style="display:inline-block;"/>');
+	*/
+	
 	// Load timeline from server
 	$.get('/get/timeline', timelineCallback );
 	
@@ -20,9 +30,15 @@ head.ready(function() {
 		// Process server data into #timeline
 		$.each( timeline, function( i, e ) {
 			var item = $('<div/>');
-			item.append('<p class="text-muted">' + e.when + '</p>');
+			item.append('<p class="text-muted">' + e.time_submit + '</p>');
 			item.append('<h2>' + e.title + '</h2>');
 			item.append('<p>' + e.description + '</p>');
+			
+			// I have code to hard-set the image height & width on first load & resize
+			// For now, you'll have to refresh after first load
+			// Image first or text first? Leaning towards text first
+			item.append('<img src="/img/0.jpg"/>');
+			
 			
 			item.wrapInner('<div class="item-inner"/>');
 			item.addClass('item');
