@@ -1,14 +1,10 @@
 // Instead of document.ready();
 head.ready(function() {
-	
-	var timeline;
-	
-	// Bootstrap tab handling
-	$('#tasknav a').click(function (e) {
-		e.preventDefault();
-		$(this).tab('show');
-	});
-	
+
+	// Script-wide member id
+	var url = document.location.pathname.split('/');
+	var id = url[url.length-1];
+
 	/*
 	$('#start,#end').datetimepicker({
 		timeFormat: "hh:mm tt",
@@ -17,18 +13,55 @@ head.ready(function() {
 		buttonImage: "/img/clock-icon.png",
 		buttonImageOnly: true
 	}).wrap('<div style="display:inline-block;"/>');
-	*/
+	// */
+	
+	// Bootstrap tab handling
+	$('#tasknav a').click(function (e) {
+		e.preventDefault();
+		$(this).tab('show');
+	});
+	
+	// Expand description textbox when overflow
+	$('#description').css('overflow', 'hidden').autogrow();
+	
+	// Define user id in form
+	$('#recordtask #user').val( id );
+	
+	// Attach log submit handler to form
+	$('#recordtask').on( 'submit', function( event ) {
+		
+		event.preventDefault();
+		
+		// $.serialize() requires form fields to have names
+		console.log( $(this).serialize() );
+		
+		// TODO: validate form here
+		
+		// TODO: server-side confirm that this is the right person
+		$.post('/post/timeline', $('#recordtask').serialize(), recordtaskCallback );
+		
+	});
+	
+	function recordtaskCallback( data ) {
+		console.log( data );
+	}
 	
 	// Load timeline from server
-	$.get('/get/timeline', timelineCallback );
+	$.get('/get/timeline/' + id, timelineCallback );
 	
 	function timelineCallback( data ) {
 		
-		timeline = JSON.parse(data);
-		console.log( timeline );
+		var timeline = JSON.parse(data);
+		
+		// Temporary solution for no results
+		if( timeline.length < 1 ) {
+			$('#loading-timeline .panel-body').html('<p>No results!</p>');
+			return false;
+		}
 		
 		// Process server data into #timeline
 		$.each( timeline, function( i, e ) {
+			
 			var item = $('<div/>');
 			item.append('<p class="text-muted">' + e.time_submit + '</p>');
 			item.append('<h2>' + e.title + '</h2>');
@@ -43,7 +76,8 @@ head.ready(function() {
 			item.wrapInner('<div class="item-inner"/>');
 			item.addClass('item');
 			
-			$('#timeline').append( item )
+			$('#timeline').append( item );
+			
 		});
 		
 		// Trigger isotope
@@ -56,7 +90,8 @@ head.ready(function() {
 		
 	}
 	
-	
+	function submitLog() {
+	}
 	
 });
 

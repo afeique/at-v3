@@ -1,0 +1,106 @@
+<!-- This page is our current home; for now, it spits out ALL posts & displays ALL users -->
+<!-- Click on user to see their page; if you are that user, you can log tasks, else only view profile -->
+
+<script>
+// Inline script for now, since it's easier to upkeep
+
+// Same exact as in timeline.js; css'd to line instead of tile view
+// We'll need to move the timeline retrieval & output function to a separate file,
+//   which will be included in both /timeline and /recent
+
+head.ready( function() {
+
+	// Load timeline from server
+	$.get('/get/timeline', timelineCallback );
+	
+	function timelineCallback( data ) {
+		
+		var timeline = JSON.parse(data);
+		console.log( timeline );
+		
+		// Process server data into #timeline
+		$.each( timeline, function( i, e ) {
+			var item = $('<div/>');
+			item.append('<p class="text-muted">' + e.time_submit + '</p>');
+			item.append('<h2>' + e.title + '</h2>');
+			item.append('<p>' + e.description + '</p>');
+			
+			// I have code to hard-set the image height & width on first load & resize
+			// For now, you'll have to refresh after first load
+			// Image first or text first? Leaning towards text first
+			item.append('<img src="/img/0.jpg"/>');
+			
+			
+			item.wrapInner('<div class="item-inner"/>');
+			item.addClass('item');
+			
+			$('#timeline').append( item )
+		});
+		
+		// Trigger isotope
+		$('#timeline').isotope({
+			itemSelector : '.item',
+			layoutMode : 'sloppyMasonry'
+		}, function() {
+			$('#loading-timeline').slideUp();
+		});
+		
+	}
+	
+});
+
+// This is the user retrieval; separate head.ready call b/c the above part might be abstracted later
+head.ready( function() {
+	
+	// Load timeline from server
+	$.get('/get/users', usersCallback );
+	
+	function usersCallback( data ) {
+		
+		var users = JSON.parse(data);
+		console.log( users );
+		
+		// Process server data into #users
+		$.each( users, function( i, e ) {
+			var item = $('<div/>');
+			item.append('<h2><a href="/timeline/' + i + '">' + e.members_display_name + '</a></h2>');
+			item.appendTo('#users');
+		});
+		
+		$('#loading-users').slideUp();
+		
+	}
+	
+});
+
+</script>
+
+<div class="row">
+
+	<!-- Recent users -->
+	<div class="col-sm-2 col-xs-12">
+		
+		<div class="panel">
+			<div class="panel-body" id="users">
+				<p id="loading-users"><img src="img/preloader.gif" alt="Preloader"/> Loading users...</p>
+			</div>
+		</div>
+		
+	</div>
+
+	<!-- Timeline, retrieved from Database -->
+	<div class="col-sm-10 col-xs-12">
+
+		<!-- Loading, displayed while retrieving timeline -->
+		<div id="loading-timeline" class="panel">
+			<div class="panel-body">
+				<p><img src="img/preloader.gif" alt="Preloader"/> Loading collections...</p>
+			</div>
+		</div>
+	
+		<!-- Filled with isotope of timeline stuff -->
+		<div id="timeline"></div>
+			
+	</div><!-- /.col-lg-8 & TimelineCtrl -->
+	
+</div> <!-- /.row -->	

@@ -20,7 +20,7 @@ textarea.noResize { resize:none; }
 }
 
 /* TIMELINE DISPLAY */
-#loading-timeline {
+#loading-timeline, #loading-users {
 	text-align: center;
 }
 
@@ -32,6 +32,9 @@ textarea.noResize { resize:none; }
 .item {
 	display: inline-block;
 	padding: 5px;
+	padding-top: 0px;
+	padding-bottom: 10px;
+	
 	width: 25%;
 }
 
