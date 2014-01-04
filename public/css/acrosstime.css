@@ -19,6 +19,18 @@ textarea.noResize { resize:none; }
 	border: 1px solid #ddd;
 }
 
+input.invalid {
+	background-image: url("/img/icon-x.png");
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+
+input.valid {
+	background-image: url("/img/icon-check.png");
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+
 /* TIMELINE DISPLAY */
 #loading-timeline, #loading-users {
 	text-align: center;

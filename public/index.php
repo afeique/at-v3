@@ -16,13 +16,14 @@ $klein->respond(function ($request, $response, $service, $app) use ($ipbwi) {
 	// create default JavaScript collection
 	$service->js = new \Acrosstime\JavaScriptCollection( array( array( 
 		'jquery.min',
-		'jquery-ui.min',
-		'jquery-ui-timepicker-addon.min',
 		'bootstrap.min',
 		'jquery.countdown',
 		'jquery.isotope.min',
 		'jquery.isotope.sloppy-masonry.min',
 		'jquery.autogrow-textarea.min',
+		'jquery.validate.min',
+		'moment.min',
+		'acrosstime', // helpers
 		'angular.min'
 	)));
 
@@ -115,11 +116,11 @@ $klein->respond('POST', '/post/timeline', function ($request, $response, $servic
 	//			-3 = submitted for the wrong user! hacking attempt?
 	
 	// Crude server-side verification
-	if( empty($_POST['user']) ||
-		empty($_POST['task']) ||
-		empty($_POST['description']) ||
-		empty($_POST['start']) ||
-		empty($_POST['end']) )
+	if( empty($_POST['member']) ||
+		empty($_POST['title']) ||
+		//empty($_POST['description']) ||
+		empty($_POST['time_start']) ||
+		empty($_POST['time_end']) )
 	return 0; // return false returns nothing!
 	
 	// Verify the data via DateTime construct
@@ -130,13 +131,13 @@ $klein->respond('POST', '/post/timeline', function ($request, $response, $servic
 	$format_in = 'm/d/y g:i a';
 	$format_out = 'Y-m-d H:i:s';
 	
-	$start = DateTime::createFromFormat( $format_in, $_POST['start'] );
+	$start = DateTime::createFromFormat( $format_in, $_POST['time_start'] );
 	
 	$e = DateTime::getLastErrors();
 	if( $e['warning_count'] > 0 or $e['error_count'] > 0 )
 	return -1;
 	
-	$end = new DateTime( $_POST['end'] );
+	$end = new DateTime( $_POST['time_end'] );
 	
 	$e = DateTime::getLastErrors();
 	if( $e['warning_count'] > 0 or $e['error_count'] > 0 )
@@ -148,7 +149,7 @@ $klein->respond('POST', '/post/timeline', function ($request, $response, $servic
 	
 	// Check if the user is submitting for themselves
 	$m = $service->ipbwi->member->info();
-	if( $m['member_id'] != $_POST['user'] )
+	if( $m['member_id'] != $_POST['member'] )
 	return -3;
 	
 	// Insert the data into the db
@@ -157,8 +158,8 @@ $klein->respond('POST', '/post/timeline', function ($request, $response, $servic
 		VALUES 	(:member,:title,:description,:start,:end)');
 	
 	$STH->execute( array(
-		':member' => $_POST['user'],
-		':title' => $_POST['task'],
+		':member' => $_POST['member'],
+		':title' => $_POST['title'],
 		':description' => $_POST['description'],
 		':start' => $start->format($format_out),
 		':end' => $end->format($format_out)
