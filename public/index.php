@@ -16,14 +16,14 @@ $klein->respond(function ($request, $response, $service, $app) use ($ipbwi) {
 	// create default JavaScript collection
 	$service->js = new \Acrosstime\JavaScriptCollection( array( array( 
 		'jquery.min',
+		'jquery-ui.min',
 		'bootstrap.min',
-		'jquery.countdown',
-		'jquery.isotope.min',
-		'jquery.isotope.sloppy-masonry.min',
-		'jquery.autogrow-textarea.min',
-		'jquery.validate.min',
-		'moment.min',
-		'acrosstime', // helpers
+		'jquery.isotope.min', //timeline
+		'jquery.isotope.sloppy-masonry.min', //timeline
+		'jquery.validate.min', //timeline
+		'moment.min', //timeline
+		'HumanizeDuration.min', //timeline
+		'acrosstime', // global helpers
 		'angular.min'
 	)));
 
@@ -94,12 +94,9 @@ $klein->respond('GET', '/get/timeline/[:id]', function($request, $response, $ser
 	$STH = $DBH->prepare('SELECT * FROM at_timeline WHERE member=:id ORDER BY time_submit DESC');
 	$STH->setFetchMode(PDO::FETCH_ASSOC);
 	$STH->execute( array(':id' => $request->id) );
-	$Result = $STH->fetchAll();
+	$result = $STH->fetchAll();
 
-	# close the connection
-	$DBH = null;
-	
-	$json = json_encode( $Result );
+	$json = json_encode( $result );
 	
 	return $json;
 
@@ -109,48 +106,55 @@ $klein->respond('GET', '/get/timeline/[:id]', function($request, $response, $ser
 $klein->respond('POST', '/post/timeline', function ($request, $response, $service) {
 	$service->layout(Null);
 
-	// Returns:	 1 = success!
+	// Return object properties:
+	//
+	// code:	 1 = success!
 	// 			 0 = missing field
 	//			-1 = invalid field (i.e. invalid DateTimes )
 	//			-2 = submitted while no user logged in
-	//			-3 = submitted for the wrong user! hacking attempt?
+	// error:	humanized error msg
+	// aid:		We already have most of the fields from our form
+	//			We can guess time_submit, save ourselves a query
+	//			We need to pass the last insert id
 	
 	// Crude server-side verification
-	if( empty($_POST['member']) ||
-		empty($_POST['title']) ||
-		//empty($_POST['description']) ||
-		empty($_POST['time_start']) ||
-		empty($_POST['time_end']) )
-	return 0; // return false returns nothing!
+	if( empty($_POST['title']) or empty($_POST['time_start']) or empty($_POST['time_end']) ) {
+		$out['error'] = 'Missing field!';
+		$out['success'] = 0;
+		return json_encode( $out );
+	}
 	
 	// Verify the data via DateTime construct
 	// Checking for false doesn't work! Simply using construct accepts ridiculous inputs w/o warning
 	//	(e.g. 'a' is acceptable)
-	// TODO: perhaps accept more datetime formats? regex
+	// TODO: perhaps accept more datetime formats? test with strict regex to determine the exact format
 	
 	$format_in = 'm/d/y g:i a';
 	$format_out = 'Y-m-d H:i:s';
 	
 	$start = DateTime::createFromFormat( $format_in, $_POST['time_start'] );
-	
-	$e = DateTime::getLastErrors();
-	if( $e['warning_count'] > 0 or $e['error_count'] > 0 )
-	return -1;
-	
-	$end = new DateTime( $_POST['time_end'] );
-	
-	$e = DateTime::getLastErrors();
-	if( $e['warning_count'] > 0 or $e['error_count'] > 0 )
-	return -1;
+	$end = DateTime::createFromFormat( $format_in, $_POST['time_end'] );
+	$se = $start->getLastErrors();
+	$ee = $end->getLastErrors();
+	if( $se['warning_count'] > 0 or $se['error_count'] > 0 or
+		$ee['warning_count'] > 0 or $ee['error_count'] > 0 ) {
+		
+		$out['error'] = 'Invalid time!';
+		$out['success'] = -1;
+		return json_encode( $out );
+		
+	}
 	
 	// Check if the user is logged in
-	if( !$service->ipbwi->member->isLoggedIn() )
-	return -2;
+	if( !$service->ipbwi->member->isLoggedIn() ) {
+		$out['error'] = 'Not logged in!';
+		$out['success'] = -2;
+		return json_encode( $out );
+	}
 	
-	// Check if the user is submitting for themselves
+	// Pull from ipbwi to get member id
+	// TODO: *Absolutely* verify if the user is submitting for themselves? Somehow.
 	$m = $service->ipbwi->member->info();
-	if( $m['member_id'] != $_POST['member'] )
-	return -3;
 	
 	// Insert the data into the db
 	$DBH = \AcrossTime\initPDO();
@@ -158,18 +162,78 @@ $klein->respond('POST', '/post/timeline', function ($request, $response, $servic
 		VALUES 	(:member,:title,:description,:start,:end)');
 	
 	$STH->execute( array(
-		':member' => $_POST['member'],
+		':member' => $m['member_id'],
 		':title' => $_POST['title'],
 		':description' => $_POST['description'],
 		':start' => $start->format($format_out),
 		':end' => $end->format($format_out)
 	));
 	
-	$DBH = null;
+	// Gather last insert id
+	$out['aid'] = $DBH->lastInsertId();
+	$out['success'] = 1;
 	
-	return 1;
+	return json_encode( $out );
 	
 });
+$klein->respond('POST', '/delete/post', function ($request, $response, $service) {
+	$service->layout(Null);
+	// Return object properties:
+	//
+	// code:	 1 = success!
+	// 			 0 = post not found
+	//			-1 = post does not belong to user
+	//			-2 = user not logged in
+	//			-3 = some sort of PDO error
+	// error:	humanized error msg
+	// aid:		Just spit the $_POST var right back out
+	
+	// Check if user is logged in
+	if( !$service->ipbwi->member->isLoggedIn() ) {
+		$out['error'] = 'Not logged in!';
+		$out['success'] = -2;
+		return json_encode( $out );
+	}else{
+		$m = $service->ipbwi->member->info();
+	}
+	
+	// Moving into database phase
+	$DBH = \AcrossTime\initPDO();
+	$STH = $DBH->prepare('SELECT member FROM at_timeline WHERE aid=:id');
+	$STH->setFetchMode(PDO::FETCH_ASSOC);
+	$STH->execute( array(':id' => $_POST['aid']) );
+	$result = $STH->fetch();
+	
+	// Check if post exists
+	if( !$result ) {
+		$out['error'] = 'Post not found!';
+		$out['success'] = 0;
+		return json_encode( $out );
+	}
+	
+	// Check if user owns post
+	if( $result['member'] != $m['member_id'] ) {
+		$out['error'] = 'Not your post!';
+		$out['success'] = -1;
+		return json_encode( $out );
+	}
+	
+	// Delete the post
+	$STH = $DBH->prepare('DELETE FROM at_timeline WHERE aid=:id');
+	$result = $STH->execute( array(':id' => $_POST['aid']) );
+	
+	if( $result > 0 ) {
+		$out['aid'] = $_POST['aid'];
+		$out['success'] = 1;
+		return json_encode( $out );
+	}else{
+		$out['error'] = 'Unknown error!';
+		$out['success'] = -3;
+		return json_encode( $out );
+	}
+	
+});
+
 
 $klein->respond('GET', '/get/users', function($request, $response, $service) {
 	$service->layout(Null);
@@ -200,6 +264,7 @@ $klein->respond('/m/[:id]', function ($request, $response, $service) {
 	
 });
 
+/*
 $klein->respond('[/]?[:page]?', function ($request, $response, $service) {
 	
 	// Page-checking
@@ -216,5 +281,6 @@ $klein->respond('[/]?[:page]?', function ($request, $response, $service) {
 		
 	}
 });
+*/
 
 $klein->dispatch();

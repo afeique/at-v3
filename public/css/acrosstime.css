@@ -32,20 +32,25 @@ input.valid {
 }
 
 /* TIMELINE DISPLAY */
-#loading-timeline, #loading-users {
-	text-align: center;
+#options * {
+	vertical-align: middle;
+	list-style: none;
+}
+
+#options li {
+	display: inline-block;
+	border-right: 2px solid #ddd;
+	padding-right: 4px;
 }
 
 #timeline {
 	box-sizing: content-box;
-	margin: 0px -5px;
+	margin: -5px -5px;
 }
 
 .item {
 	display: inline-block;
 	padding: 5px;
-	padding-top: 0px;
-	padding-bottom: 10px;
 	
 	width: 25%;
 }
@@ -61,12 +66,13 @@ input.valid {
 }
 
 /* Arbitrary */
-@media (max-width: 400px) {
-	.item  {	width: 100%;	}
+@media (max-width: 350px) {
+	.item  {	width: 100%; }
+	.container { padding: 5px; }
 }
 
 /* For when we get around to image upload */
-.item img {
+.item .image {
 	background-image: url('../img/preloader.gif');
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -87,6 +93,18 @@ input.valid {
 	text-decoration: none;
 }
 
+.item .close {
+
+	width: 32px;
+	height: 32px;
+	padding: 5px;
+}
+
+.item .close * {
+
+}
+
+
 /* CURRENTLY NOT IN USE */
 .timer {
 	width: 100%;
@@ -104,70 +122,3 @@ input.valid {
 	-ms-user-select: none;
 	user-select: none;
 }
-
-/* Start: Recommended Isotope styles */
-
-/**** Isotope Filtering ****/
-
-.isotope-item {
-  z-index: 2;
-}
-
-.isotope-hidden.isotope-item {
-  pointer-events: none;
-  z-index: 1;
-}
-
-/**** Isotope CSS3 transitions ****/
-
-.isotope,
-.isotope .isotope-item {
-  -webkit-transition-duration: 0.8s;
-     -moz-transition-duration: 0.8s;
-      -ms-transition-duration: 0.8s;
-       -o-transition-duration: 0.8s;
-          transition-duration: 0.8s;
-}
-
-.isotope {
-  -webkit-transition-property: height, width;
-     -moz-transition-property: height, width;
-      -ms-transition-property: height, width;
-       -o-transition-property: height, width;
-          transition-property: height, width;
-}
-
-.isotope .isotope-item {
-  -webkit-transition-property: -webkit-transform, opacity;
-     -moz-transition-property:    -moz-transform, opacity;
-      -ms-transition-property:     -ms-transform, opacity;
-       -o-transition-property:      -o-transform, opacity;
-          transition-property:         transform, opacity;
-}
-
-/**** disabling Isotope CSS3 transitions ****/
-
-.isotope.no-transition,
-.isotope.no-transition .isotope-item,
-.isotope .isotope-item.no-transition {
-  -webkit-transition-duration: 0s;
-     -moz-transition-duration: 0s;
-      -ms-transition-duration: 0s;
-       -o-transition-duration: 0s;
-          transition-duration: 0s;
-}
-
-/* End: Recommended Isotope styles */
-
-/* css for timepicker */
-.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
-.ui-timepicker-div dl { text-align: left; }
-.ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
-.ui-timepicker-div dl dd { margin: 0 10px 10px 45%; }
-.ui-timepicker-div td { font-size: 90%; }
-.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
-
-.ui-timepicker-rtl{ direction: rtl; }
-.ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
-.ui-timepicker-rtl dl dt{ float: right; clear: right; }
-.ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }

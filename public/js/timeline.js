@@ -6,6 +6,9 @@ head.ready( function() {
 	
 	$.validator.addMethod("dateTime", function(value, element) {
 		
+		// This is the key!!!
+		// http://momentjs.com/docs/#/parsing/string-formats/
+		
 		// Split date & time, keep am/pm with time
 		// TODO: Make more efficient?
 		var stamp = value.split(" ");
@@ -19,38 +22,10 @@ head.ready( function() {
 		
 	});
 	
-	
-	/*
-	// This is a more forgiving version. Disabled until I get server-side working to match
-	// TODO: add 24 hour military time with no separator?
-	$.validator.addMethod("dateTime", function(value, element) {
-		
-		var stamp = value.split(" ");
-		
-		if( stamp.length > 2 ) {
-			stamp[1] = stamp[1] + ' ' + stamp[2];
-			delete stamp[2];
-		}
-		
-		var validDate = !/Invalid|NaN/.test(new Date(stamp[0]).toString());
-		
-		if( !validDate ) {
-			if( stamp.length > 1 ) {
-				stamp[0] = stamp[0] + ' ' + stamp[1];
-				delete stamp[1];
-			}
-		}
-		
-		var validTime = /^((([0]?[1-9]|1[0-2])(:|\.)[0-5][0-9]((:|\.)[0-5][0-9])?( )?(AM|am|a\.m\.|PM|pm|p\.m\.))|(([0]?[0-9]|1[0-9]|2[0-3])(:|\.)[0-5][0-9]((:|\.)[0-5][0-9])?))$/i.test(stamp[0]);
-		
-		return this.optional(element) || (validTime);
-		
-	}, 'Please enter a valid time!');
-	//*/
-
-	// Script-wide member id
+	// Script-wide member id - used for /get/timeline/
 	var url = document.location.pathname.split('/');
 	var id = url[url.length-1];
+	var format = 'MM/DD/YY h:mm a';
 
 	// Bootstrap tab handling
 	$('#tasknav a').click(function (e) {
@@ -59,22 +34,16 @@ head.ready( function() {
 	});
 	
 	// Expand description textbox when overflow
-	$('#description').css('overflow', 'hidden').autogrow();
+	//$('#description').css('overflow', 'hidden').autogrow();
+
+	// "Now" Buttons
+	$('#time_start_now, #time_end_now').click( function() {
+		var input = $(this).parents('.input-group').find('input');
+		input.val( moment().format( format ) );
+		input.keyup();
+	});
 	
-	// Define user id in form
-	$('#recordtask #member').val( id );
-	
-	// DEBUG: 
-	//*
-	var start = moment().subtract('m', 10).format('MM/DD/YY h:mm a');
-	var end = moment().format('MM/DD/YY h:mm a');
-	$('#recordtask #title').val( 'AcrossTime' );
-	$('#recordtask #description').val( 'Testing!' );
-	$('#recordtask #time_start').val( start );
-	$('#recordtask #time_end').val( end );
-	//*/
-	
-	// TODO: validate form here
+	// Define validation rules & submit handler
 	$('#recordtask').validate({
 		rules: {
 			title: {
@@ -93,49 +62,92 @@ head.ready( function() {
 			}
 		},
 		submitHandler: function(form) {
+			// TODO: *Actually* disable the form, not just the inputs
+			// Collect and save data, serialize form..?
+			// e.g. form can be sent by hitting enter on a textbox
+			$('#options .loader').fadeTo('fast',1);
 			$.post('/post/timeline', $('#recordtask').serialize(), recordtaskCallback );
+			$("#recordtask :input").prop('disabled', true);
 		},
 		validClass: "valid",
 		errorClass: "invalid",
 		errorPlacement: function(error, element) {}
 	});
 	
-	function recordtaskCallback( data ) {
-		var msg, obj;
+	// Calculate total time or display validation errors
+	// Because it checks if the fields are valid, it must go after the validation rules
+	// TODO: make this into some sort of validation rule?
+	$('#time_start, #time_end').keyup( function() {
 		
-		switch( parseInt(data) ) {
-			case 1:
-				obj = $('#recordtask').serializeObject();
-				obj.time_submit = moment().format('YYYY-MM-DD HH:mm:ss');
-				timelineAdd( 0, obj );
-			break;
-			case 0:
-				msg = 'Missing field!';
-			break;
-			case -1:
-				msg = 'Invalid field!';
-			break;
-			case -2:
-				msg = "Not logged in!";
-			break;
-			case -3:
-				msg = "Wrong user. Naughty you!";
-			break;
+		if( !$('#time_start,#time_end').valid() ) {
+			$('#total').text( 'Invalid time!');
+		}else{
+			var start = moment( $('#time_start').val(), format);
+			var end = moment( $('#time_end').val(), format);
+			var diff = end.diff(start);
+			
+			if( diff < 0 ) {
+				$('#total').text( 'Negative duration!' );
+			}else{
+				// Moment.js does not humanize exact durations
+				$('#total').text( humanizeDuration(diff) );
+			}
+			
 		}
 		
-		if( typeof msg !== 'undefined' ) {
-			$('<div class="alert alert-dismissable"/>')
+	});
+	
+
+	//* DEBUG: Tired of retyping this everytime
+	var start = moment().subtract('m', 10).format( format );
+	var end = moment().format( format );
+	$('#recordtask #title').val( 'AcrossTime' );
+	$('#recordtask #description').val( 'Testing!' );
+	$('#recordtask #time_start').val( start );
+	$('#recordtask #time_end').val( end );
+	$('#time_start').keyup();
+	//*/
+	
+	// Decide if insert is successful, then delegate to timelineAdd();
+	function recordtaskCallback( data ) {
+		var result = JSON.parse(data);
+		
+		if( result.success != 1 ) {
+			var msg = result.error;
+			
+			// TODO: Abstract this into an alert helper function
+			$('<div class="alert alert-danger alert-dismissable"/>')
 				.append('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>')
 				.append('<p>' + msg + '</p>')
-				.addClass('alert-danger')
 				.appendTo( '#error');
+				
+		}else{
+			// TODO: Enable form properly? (see above)
+			$("#recordtask :input").prop('disabled', false);
+			$('#options .loader').fadeTo('slow', 0);
+			
+			var item = $('#recordtask').serializeObject();
+			item.time_submit = moment().format('YYYY-MM-DD HH:mm:ss');
+			item.aid = result.aid;
+			
+			timelineAdd( 0, item );
+			
+			// Reset form after serializing
+			$('#recordtask')[0].reset();
+
 		}
 		
 	}
 
-	// Trigger isotope! We'll add items later. Wait for init, then get timeline
+	
+	
+	
+	// Trigger isotope! We'll add items later, one by one, via timelineAdd();
+	// Wait after isotope init to AJAX timeline!
 	$('#timeline').isotope({
 		itemSelector : '.item',
+		// TODO: modify sloppyMasonry to go straight across (kinda)
+		//		 kind like adding height difference tolerance
 		layoutMode : 'sloppyMasonry',
 		sortBy : 'time',
 		sortAscending : false,
@@ -149,48 +161,73 @@ head.ready( function() {
 		$.get('/get/timeline/' + id, timelineCallback );
 	});
 
-	
-	
-	
 	function timelineCallback( data ) {
-		
 		var items = JSON.parse(data);
-		
-		// Temporary solution for no results
-		if( items.length < 1 )
-		$('#loading-timeline .panel-body').html('<p>No results!</p>');
-		
-		// Process server data into #timeline
 		$.each( items, timelineAdd );
-		
-		$('#loading-timeline').hide();
+		$('#options .loader').fadeTo('slow',0);
 	}
 	
-
-	
+	// Populates isotope div
 	function timelineAdd( i, e ) {
+		
 		var item = $('<div/>');
 		
-		// TODO: add more filters
+		// TODO: add more filters?
+		item.attr('data-aid', e.aid );
 		
-		item.append('<p class="text-muted">' + e.time_submit + '</p>');
-		item.append('<h2>' + e.title + '</h2>');
-		item.append('<p>' + e.description + '</p>');
+		item.append('<p class="time_submit text-muted">' + e.time_submit + '</p>');
+		item.append('<h2 class="title">' + e.title + '</h2>');
+		item.append('<p class="description">' + e.description + '</p>');
 		
 		// Image first or text first? Leaning towards text first
-		item.append('<img src="/img/0.jpg"/>');
+		item.append('<img class="image" src="/img/0.jpg"/>');
 		
 		item.wrapInner('<div class="item-inner"/>');
 		item.addClass('item');
+		
+		// Remove button
+		var btn = $('<button type="button" class="close" aria-hidden="true">&times;</button>')
+			btn.attr('data-target', e.aid);
+			btn.click( removePost );
+		item.prepend( btn );
+		
+		// TODO: Comments
+		// TODO: Likes?
+		// TODO: Privacy indicator
 		
 		// This takes care of cache issues. Namely, this:
 		// http://stackoverflow.com/questions/8622906/isotope-overlapping-images
 		item.imagesLoaded( function() {
 			$('#timeline').isotope( 'insert', item );
 		});
+		
 	}
 	
-
+	function removePost() {
+		var data = new Object();
+		data['aid'] = $(this).data('target');
+		
+		// TODO: Add confirm dialog y/n
+		
+		$.post('/delete/post', $.param(data), removePostCallback );
+		$(this).html('<img src="/img/preloader.gif" alt="Deleting..." />');
+		$(this).prop('disabled', true);
+	}
+	
+	function removePostCallback(data) {
+		var result = JSON.parse(data);
+		
+		console.log( result );
+		
+		if( result.success != 1 ) {
+			$(this).html('&times;');
+			$(this).prop('disabled', false);
+		}else{
+			var target = $('.item[data-aid='+result.aid+']');
+			$('#timeline').isotope( 'remove', target );
+		}
+		
+	}
 	
 	function submitLog() {
 	}

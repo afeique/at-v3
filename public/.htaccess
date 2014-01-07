@@ -1,6 +1,6 @@
 RewriteEngine On
 RewriteBase /
-RewriteRule ^[forums|img|css]$ - [L]
+RewriteRule ^[forums|img|css|fonts]$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]

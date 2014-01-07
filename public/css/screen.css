@@ -72,7 +72,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 400;
-  padding-top: 60px;
+  /*padding-top: 60px;*/
 }
 
 /* line 29, ../../sass/screen.scss */
